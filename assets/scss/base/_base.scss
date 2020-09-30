@@ -1,0 +1,15 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%; // this makes 1 REM equal 10px, assuming user is using normal preset UA 16px
+}
+
+body {
+    box-sizing: border-box;
+}
