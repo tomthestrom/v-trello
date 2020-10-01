@@ -1,0 +1,18 @@
+.user-icon {
+    background-color: #5245a8;
+    padding: 1rem;
+    border: 1px solid grey;
+    border-radius: 50%;
+
+    height: 3.2rem;
+    width: 3.2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__initials {
+        font-size: 1.6rem;
+        text-transform: uppercase;
+    }
+}

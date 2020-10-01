@@ -1,0 +1,29 @@
+.board {
+    &__title-container {
+        width: 6rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__management {
+        padding: .8rem;
+        height: 4.8rem;
+
+        display: flex;
+        align-items: center;
+    }
+
+    &__icon {
+        fill: #fff;
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+
+    &__ownership {
+        @extend %board__pseudo-border;
+    }
+
+    &__visibility {
+        @extend %board__pseudo-border;
+    }
+}

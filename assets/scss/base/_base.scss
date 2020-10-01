@@ -6,10 +6,21 @@
     box-sizing: inherit;
 }
 
+:root {
+    --color-board-management-background: hsla(0,0%,100%,.275);
+
+    --color-primary-blue: #0079bf;;
+    --color-primary-blue--dark:#026aa7;
+
+
+}
+
 html {
     font-size: 62.5%; // this makes 1 REM equal 10px, assuming user is using normal preset UA 16px
 }
 
 body {
+    font-size: 1.6rem;
+    background-color: var(--color-primary-blue);
     box-sizing: border-box;
 }
