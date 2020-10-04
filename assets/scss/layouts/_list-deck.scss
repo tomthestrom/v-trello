@@ -1,0 +1,68 @@
+.list-deck {
+
+    display: grid;
+    color: rgb(23, 43, 77);
+
+    &__list {
+        padding: 1rem 0.8rem;
+        border-radius: $border-radius-default;
+        background-color: var(--color-list-background);
+        width: 27.2rem;
+
+    }
+
+    &__title {
+        font-size: 1.4rem;
+        margin-left: .6rem;
+        margin-bottom: 1rem;
+    }
+
+    &__card-list {
+        list-style: none;
+    }
+
+    &__card {
+        background-color: var(--color-list-card-background);
+        padding: .6rem .8rem;
+        border-radius: $border-radius-default;
+        margin-bottom: .5rem;
+        box-shadow: 0 1px 0 rgba(9,30,66,.25);
+        cursor: pointer;
+
+        display: flex;
+
+        &:hover {
+            background-color: var(--color-list-card-background--hover);
+        }
+
+        &:hover .btn--edit-card {
+            opacity: 1;
+        }
+    }
+
+    &__card-title {
+        font-size: inherit;
+        font-weight: inherit;
+        margin-right: auto;
+    }
+
+    &__add-card {
+        color: var(--color-list-card-add-card);
+        display:flex;
+        justify-content: space-between;
+
+        &:hover {
+            color: #000;
+        }
+    }
+
+    &__icon {
+        fill: var(--color-list-card-add-card);;
+        height: 1.2rem;
+        width: 1.2rem;
+
+        &:hover {
+            fill: #000;
+        }
+    }
+}

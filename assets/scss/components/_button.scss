@@ -1,5 +1,6 @@
 .btn {
     font-size: inherit;
+    color: inherit;
     background-color: transparent;
 
     border: none;
@@ -71,5 +72,41 @@
 
     &--favorite {
         @extend %board__pseudo-border;
+    }
+
+    &--add-card {
+        padding: .6rem;
+        border-radius: $border-radius-default;
+
+        width: 22.8rem;
+        display: flex;
+        align-items: center;
+
+        span {
+            line-height: 2rem;
+            margin-left: .6rem;
+        }
+
+        &:hover {
+            background-color: var(--color-list-card-add-card--hover);
+        }
+    }
+
+    &--edit-card {
+        opacity: 0;
+        
+        padding: 1.2rem;
+            
+        height: 2rem;
+        width: 2rem;
+
+        svg {
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+        }
+        &:hover {
+            background-color: var(--color-list-card-add-card--hover);
+        }
     }
 }

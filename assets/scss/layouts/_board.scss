@@ -1,4 +1,12 @@
 .board {
+    font-size: 1.4rem;
+    color: #fff;
+    
+    padding: 0 1rem;
+    &__title {
+        font-size: 1.8rem;
+    }
+
     &__title-container {
         width: 6rem;
         display: flex;
@@ -6,7 +14,6 @@
     }
 
     &__management {
-        padding: .8rem 1rem;
         height: 4.8rem;
 
         display: flex;
