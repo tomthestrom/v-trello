@@ -3,13 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const BINDABLES     = document.querySelectorAll(`[${BINDABLE_ATTR}]`);
 
     /**
-     * create our pairs, stored under the key of BIND_TO
+     * create our pairs, stored under the key of the BIND_TO
      * value in format:
-     * {'currentValue': *value*
+     * * BIND_TO * => {'currentValue': *value*
      * 'inputFrom': '<input> element'
      * 'outputTo': '!'<input>' smth like h1/h2/smth else'}
      */
-    const BINDABLE_PAIRS = (function (bindables) {
+    const BINDABLE_PAIRS = (function (bindables, BINDABLE_ATTR) {
         this.bindablePairs = {};
 
         bindables.forEach(bindable => {
@@ -26,12 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 this.bindablePairs[BIND_TO]['outputTo'] = bindable;
             }
+
+            console.log(this.bindablePairs[BIND_TO])
         });
 
         return this.bindablePairs;
-    })(BINDABLES);
+    })(BINDABLES, BINDABLE_ATTR);
     
-
 
     console.log(BINDABLE_PAIRS);
 });
