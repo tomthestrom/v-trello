@@ -4,7 +4,7 @@
     color: rgb(23, 43, 77);
 
     &__list {
-        padding: 1rem 0.8rem;
+        padding: .4rem 1rem 0.8rem;
         border-radius: $border-radius-default;
         background-color: var(--color-list-background);
         width: 27.2rem;
@@ -12,9 +12,30 @@
     }
 
     &__title {
+
+    }
+
+    &__title-input {
         font-size: 1.4rem;
-        margin-left: .6rem;
-        margin-bottom: 1rem;
+        font-weight: 700;
+        background-color: inherit;
+        color: inherit;
+        border: none;
+        margin-left: .8rem;
+        margin-bottom: .4rem;
+
+        cursor: pointer;
+
+        height: 3.3rem;
+
+
+        &:focus {
+            border: revert;
+            margin-left: 0;
+            background: revert;
+            outline: revert;
+
+        }
     }
 
     &__card-list {
