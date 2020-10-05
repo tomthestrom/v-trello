@@ -26,13 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 this.bindablePairs[BIND_TO]['outputTo'] = bindable;
             }
-
-            console.log(this.bindablePairs[BIND_TO])
         });
 
         return this.bindablePairs;
     })(BINDABLES, BINDABLE_ATTR);
-    
 
-    console.log(BINDABLE_PAIRS);
+    for (let bindable of Object.keys(BINDABLE_PAIRS)) {
+        BINDABLE_PAIRS[bindable].inputFrom.addEventListener('focusout', e => {
+            BINDABLE_PAIRS[bindable].outputTo.innerText = e.target.value;
+        });
+    }
 });

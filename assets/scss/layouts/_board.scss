@@ -7,9 +7,23 @@
         font-size: 1.8rem;
     }
 
+    &__title-input {
+        font-size: 1.4rem;
+        font-weight: 700;
+        background-color: inherit;
+        color: inherit;
+        border: none;
+        margin-left: .8rem;
+        margin-bottom: .4rem;
+
+        cursor: pointer;
+
+        height: 3.3rem;
+    }
+
     &__title-container {
         width: 6rem;
-        display: flex;
+        // display: flex;
         justify-content: center;
     }
 
