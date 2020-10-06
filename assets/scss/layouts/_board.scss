@@ -7,24 +7,41 @@
         font-size: 1.8rem;
     }
 
+    //element is hidden in default state by a u-class
     &__title-input {
-        font-size: 1.4rem;
-        font-weight: 700;
-        background-color: inherit;
-        color: inherit;
-        border: none;
-        margin-left: .8rem;
-        margin-bottom: .4rem;
+    
+        &:focus {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #000;
+            padding: 0;
+            border: revert;
+            margin: 0;
+            background: revert;
+            outline: revert;
+            position: relative;
+            //width will be adjusted by JS - growing input
+            width: 2em;
+        }
 
-        cursor: pointer;
+        &:focus ~ h1 {
+            color: transparent;
 
-        height: 3.3rem;
+            z-index: -1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
     }
 
     &__title-container {
-        width: 6rem;
+        // width: 6rem;
         // display: flex;
-        justify-content: center;
+        // justify-content: center;
+        position: relative;
+        margin-right: 1.2rem;
     }
 
     &__management {
