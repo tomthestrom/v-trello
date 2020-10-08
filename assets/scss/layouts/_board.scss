@@ -5,6 +5,13 @@
     padding: 0 1rem;
     &__title {
         font-size: 1.8rem;
+        padding: .7rem .8rem;
+        cursor: pointer;
+
+        &:hover {
+            border-radius: $border-radius-default;
+            background-color: hsla(0,0%,100%,.35);
+        }
     }
 
     //element is hidden in default state by a u-class
