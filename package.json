@@ -1,28 +1,17 @@
 {
   "name": "v-trello",
-  "version": "1.0.0",
-  "description": "My intention is to make a *\"Trello like\"* board using vanilla JS in order to brush up on my JS skills before learning a framework and creating this project in it.",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "watch:sass": "node-sass assets/scss/main.scss assets/css/style.css -w",
-    "devserver": "live-server --browser=firefox",
-    "start": "npm-run-all --parallel devserver watch:sass"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tomthestrom/v-trello.git"
-  },
-  "author": "tomthestrom",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tomthestrom/v-trello/issues"
-  },
-  "homepage": "https://github.com/tomthestrom/v-trello#readme",
-  "devDependencies": {
-    "node-sass": "^4.14.1",
-    "npm-run-all": "^4.1.5"
+    "start": "node ./bin/www"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "node-sass-middleware": "0.11.0"
   }
 }
