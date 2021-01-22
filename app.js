@@ -1,13 +1,15 @@
-const createerror = require("http-errors");
+const createError = require("http-errors");
 const express = require("express");
+const cors = require('cors');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const path = require("path");
-const cookieparser = require("cookie-parser");
 const logger = require("morgan");
-const sassmiddleware = require("node-sass-middleware");
+const sassMiddleware = require("node-sass-middleware");
 
-const indexrouter = require("./routes/index");
-const usersrouter = require("./routes/users");
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
 
 const app = express();
 
@@ -18,7 +20,6 @@ app.set("view engine", "ejs");
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(
   sassMiddleware({
     src: path.join(__dirname, "public"),
