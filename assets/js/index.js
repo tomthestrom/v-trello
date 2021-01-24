@@ -216,18 +216,3 @@ document.addEventListener("DOMContentLoaded", function (e) {
   // new BoardTitleInput()
 });
 
-
-class StringHelper {
-  constructor() {
-    if (typeof StringHelper.instance === 'object') {
-      return StringHelper.instance;
-    }
-    StringHelper.instance = this;
-    return this;
-  }
-
-  replaceSpaceWithNBSP(string) {
-    return string.replace(/\s/g, '&nbsp;');
-  }
-}
-// new BoardTitleInput()

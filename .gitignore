@@ -4,3 +4,4 @@ assets/css
 .vscode
 *.css*
 .env
+dist
