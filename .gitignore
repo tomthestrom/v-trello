@@ -4,5 +4,4 @@ assets/css
 .vscode
 *.css*
 .env
-dist
-public/*
+public/**

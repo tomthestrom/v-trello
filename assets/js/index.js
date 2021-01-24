@@ -1,3 +1,4 @@
+import "../scss/main.scss";
 //     import logger from './export.js'
 
 // document.addEventListener('DOMContentLoaded', () => {
