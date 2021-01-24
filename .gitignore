@@ -5,3 +5,4 @@ assets/css
 *.css*
 .env
 dist
+public/*
