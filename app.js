@@ -31,9 +31,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   sassMiddleware({
-    src: path.join(__dirname, "public"),
+    src: path.join(__dirname, "assets/stylesheets/*"),
     dest: path.join(__dirname, "public"),
-    indentedSyntax: true, // true = .sass and false = .scss
+    indentedSyntax: false, // true = .sass and false = .scss
     sourceMap: true,
   })
 );
