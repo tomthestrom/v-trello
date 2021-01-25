@@ -1,4 +1,6 @@
+// @TODO: some nicer way of setting paths 
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
     mode: "development",
     entry: path.resolve(__dirname, "assets/js/index.js"),
@@ -6,6 +8,11 @@ module.exports = {
         filename: "index.[contenthash].js",
         path: path.resolve(__dirname, "public/javascripts")
     },
+    plugins: [new HtmlWebpackPlugin({
+       template: path.resolve(__dirname, "views/index.ejs"),
+       filename: '../index.html'
+        })
+    ],
     module: {
         rules : [
             {
