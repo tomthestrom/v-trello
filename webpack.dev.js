@@ -21,6 +21,17 @@ module.exports = merge(common, {
     ],
     // important: webpack and the server
     // will continue to run in watch mode
-    watch: true
+    watch: true,
+    module: {
+      rules : [
+        {
+          test: /\.scss$/,
+          use: [
+                  "style-loader",
+                  "css-loader",
+                  "sass-loader"
+                ]
+        }
+      ]
     }
-  );
+  });
