@@ -1,4 +1,6 @@
 import "../scss/main.scss";
+
+console.log()
 //     import logger from './export.js'
 
 // document.addEventListener('DOMContentLoaded', () => {
