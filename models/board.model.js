@@ -9,7 +9,7 @@ const boardSchema = new Schema({
     bg_photo: { type: string, required: true },
     board_id: { type: objectId, required: true },
     title: { type: string, required: true },
-    cards: {type: array, required: false}
+    lists: {type: array, required: false}
 }, {
   timestamps: true,
 });
