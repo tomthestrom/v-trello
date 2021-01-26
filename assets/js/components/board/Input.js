@@ -1,4 +1,4 @@
-export default class BoardTitleInput extends HTMLInputElement {
+export default class TitleInput extends HTMLInputElement {
     constructor() {
       super();
       this.addEventListener('input', e => {

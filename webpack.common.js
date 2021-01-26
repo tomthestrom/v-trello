@@ -14,5 +14,20 @@ module.exports = {
        template: path.resolve(__dirname, "views/index.ejs"),
        filename: 'index.html'
         })
-    ]
+    ],
+    
+    module: {
+      rules : [
+        {
+          test: /\.scss$/,
+          use: [
+                  "style-loader",
+                  "css-loader",
+                  "sass-loader"
+                ]
+        },
+        { test: /\.ejs$/i, use: [ { loader: 'ejs-easy-loader' } ] }
+      ]
+    }
+
 }
