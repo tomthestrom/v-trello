@@ -3,7 +3,7 @@ const path = require("path");
 const common = require("./webpack.common");
 const { merge } = require("webpack-merge");
 const { WebpackPluginServe } = require('webpack-plugin-serve');
-const outputPath = path.resolve(__dirname, "public/javascripts");
+const outputPath = path.resolve(__dirname, "public");
 
 module.exports = merge(common, {
      entry: [
@@ -16,7 +16,7 @@ module.exports = merge(common, {
         },
     plugins: [
       new WebpackPluginServe({
-        static:  path.resolve(__dirname, "public")
+        static: outputPath
       })
     ],
     // important: webpack and the server
