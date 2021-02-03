@@ -1,13 +1,21 @@
-import Title from '../components/board/Title';
-import TitleClone from '../components/board/TitleClone';
-import TitleInput from '../components/board/Input';
+export default function () { 
+    return (function () {
 
-const boardService = {
-    init () {
-        customElements.define('board-title-input', TitleInput, {extends: "input"});
-        customElements.define('board-title', Title, {extends: "h1"});
-        customElements.define('board-title-clone', TitleClone, {extends: "h1"});
-    }
-}
+        let currentTitle;
+        let newTitle;
 
-export { boardService }
+        return {
+            getCurrentTitle() {
+                return this.currentTitle;
+            },
+
+            setCurrentTitle(title) {
+                this.currentTitle = title;
+            },
+
+            handleInputUpdates(updateValue) {
+                console.log(updateValue)
+            }
+        }
+    })()
+};
