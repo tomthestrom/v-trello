@@ -12,12 +12,11 @@ export default class TitleInput extends HTMLInputElement {
     }
 
     connectedCallback() {
-      console.log('connected callback', this)
       const eventHandlers = this.eventHandlers.call(this);
 
       this.addEventListener('focus', eventHandlers.focus);
-
       this.addEventListener('input', eventHandlers.input);
+      this.addEventListener('focusout', eventHandlers.focusout);
     }
 
     eventHandlers() {
@@ -35,9 +34,15 @@ export default class TitleInput extends HTMLInputElement {
         updateInnerTextFromMimickedElement(mimickedElement);
         updateWidth();
       }
+
       const input = function (event) {
         updateMimickedElementInnerHTMLFromThis(event.target.value);
         updateWidth();
+      }
+
+      const focusout = function () {
+        mimickedElementCloneInDOM.remove();
+        mimickedElementCloneInDOM = undefined;
       }
 
       const prepareMimickedElementClone = function (mimickedElement) {
@@ -55,8 +60,9 @@ export default class TitleInput extends HTMLInputElement {
       const setMimickedElementCloneInDOM = () => mimickedElementCloneInDOM = this.nextElementSibling;
 
       const updateMimickedElementInnerHTMLFromThis = text => mimickedElementCloneInDOM.innerHTML = stringHelper.replaceSpaceWithNBSP(text);
+
       return {
-        focus, input
+        focus, focusout, input
       }
     }
 
