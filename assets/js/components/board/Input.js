@@ -12,49 +12,54 @@ export default class TitleInput extends HTMLInputElement {
     }
 
     connectedCallback() {
-      const eventHandlers = this.eventHandlers(this);
+      console.log('connected callback', this)
+      const eventHandlers = this.eventHandlers.call(this);
 
       this.addEventListener('focus', eventHandlers.focus);
 
       this.addEventListener('input', eventHandlers.input);
     }
 
-    eventHandlers(self) {
+    eventHandlers() {
+      // updates once it's been inserted/removed into/from DOM
       let mimickedElementCloneInDOM  = undefined;
       const mimickedElementSelector  = this.getAttribute('mimicks-element');
 
-
       const focus = function () {
-        const mimickedElement = document.getElementById(mimickedElementSelector);
-        const mimickedElementClone = self.prepareMimickedElementClone(mimickedElement);
+        const mimickedElement = document.querySelector(mimickedElementSelector);
+        const mimickedElementClone = prepareMimickedElementClone(mimickedElement);
 
-        self.insertAdjacentElement('afterend', mimickedElementClone);
-        mimickedElementCloneInDOM = self.nextElementSibling;
-        self.value = mimickedElement.innerText()
+        this.insertAdjacentElement('afterend', mimickedElementClone);
+
+        setMimickedElementCloneInDOM();
+        updateInnerTextFromMimickedElement(mimickedElement);
         updateWidth();
       }
-      //grow element on input
       const input = function (event) {
-        mimickedElementCloneInDOM.innerHTML = stringHelper.replaceSpaceWithNBSP(event.target.value);
+        updateMimickedElementInnerHTMLFromThis(event.target.value);
         updateWidth();
       }
 
-      const updateWidth = function () {
-        self.style.width = mimickedElementCloneInDOM.getBoundingClientRect().width + 'px';
-      }
+      const prepareMimickedElementClone = function (mimickedElement) {
+        const mimickedElementClone = mimickedElement.cloneNode(true);
+        mimickedElementClone.id   += '-clone';
+        mimickedElementClone.setAttribute("style", "position: absolute; color: transparent; z-index: -5;");
+        
+        return mimickedElementClone;
+    }
 
+      const updateWidth = () => this.style.width = mimickedElementCloneInDOM.getBoundingClientRect().width + 'px';
+
+      const updateInnerTextFromMimickedElement = (mimickedElement) => this.value = mimickedElement.innerText;
+     
+      const setMimickedElementCloneInDOM = () => mimickedElementCloneInDOM = this.nextElementSibling;
+
+      const updateMimickedElementInnerHTMLFromThis = text => mimickedElementCloneInDOM.innerHTML = stringHelper.replaceSpaceWithNBSP(text);
       return {
         focus, input
       }
     }
 
-    prepareMimickedElementClone (mimickedElement) {
-      const mimickedElementClone = mimickedElement.cloneNode(true);
-      mimickedElementClone.id   += '-clone';
-      mimickedElementClone.setAttribute("style", "position: absolute; color: transparent; z-index: -5;");
-
-      return mimickedElementClone;
-    }
 
 }
 customElements.define('board-title-input', TitleInput, {extends: "input"});
