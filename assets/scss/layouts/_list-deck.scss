@@ -8,7 +8,11 @@
         border-radius: $border-radius-default;
         background-color: var(--color-list-background);
         width: 27.2rem;
+    }
 
+    &__list-header {
+        display: flex;
+        align-items: center;
     }
 
     &__title {
@@ -20,21 +24,22 @@
         font-weight: 700;
         background-color: inherit;
         color: inherit;
+        padding: .4rem 0 .4rem .8rem;
         border: none;
-        margin-left: .8rem;
         margin-bottom: .4rem;
-
+        height: 2.8rem;
+        line-height: normal;
+        flex: 1;
         cursor: pointer;
-
-        height: 3.3rem;
+        resize: none;
 
 
         &:focus {
-            border: revert;
-            margin-left: 0;
-            background: revert;
-            outline: revert;
-
+            background-color: var(--color-deck-list-header-background--focus);
+            border: 2px solid var(--color-primary-blue);
+            border-radius: 4px;
+            outline: none;
+            padding: .2rem 0 .2rem .6rem;
         }
     }
 
