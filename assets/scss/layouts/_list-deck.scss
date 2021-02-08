@@ -20,18 +20,20 @@
     }
 
     &__title-input {
+        font-family: inherit;
         font-size: 1.4rem;
         font-weight: 700;
         background-color: inherit;
         color: inherit;
         padding: .4rem 0 .4rem .8rem;
         border: none;
-        margin-bottom: .4rem;
-        height: 2.8rem;
+        margin: .4rem 0;
+        height: 3.3rem;
         line-height: normal;
         flex: 1;
         cursor: pointer;
         resize: none;
+        overflow: hidden;
 
 
         &:focus {
