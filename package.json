@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "webpack --config webpack.dev.js",
-    "start-full": "nodemon --watch models --watch views --watch routes",
-    "webpack-prod": "webpack --config webpack.prod.js"
+    "start-full": "nodemon ./bin/www",
+    "webpack-prod": "webpack --config webpack.prod.js",
+    "frontend": "webpack --config webpack.dev.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -31,5 +31,9 @@
     "webpack-cli": "^4.4.0",
     "webpack-merge": "^5.7.3",
     "webpack-plugin-serve": "^1.2.1"
+  },
+  "nodemonConfig": {
+    "ignore": ["assets/*"],
+    "delay": "2500"
   }
 }
