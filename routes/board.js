@@ -13,7 +13,7 @@ router.route('/add').post((req, res) => {
   });
 
   newBoard.save()
-  .then(() => res.json('Exercise added!'))
+  .then(() => res.json('Board created successfully!'))
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
