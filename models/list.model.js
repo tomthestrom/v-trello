@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const listSchema = new Schema({
-    list_id: { type: ObjectId, required: true },
-    title: { type: String, required: true }
+    _id: { type: "objectId", required: true },
+    board_id: { type: "objectId", required: true },
+    title: { type: "string", required: true }
 }, {
   timestamps: true,
 });

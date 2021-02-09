@@ -3,9 +3,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const cardSchema = new Schema({
-    card_id: { type: ObjectId, required: true },
-    description: { type: String, required: false },
-    title: { type: String, required: true }
+    _id: { type: "objectId", required: true },
+    description: { type: "string", required: false },
+    list_id: { type: "objectId", required: true },
+    title: { type: "string", required: true }
 }, {
   timestamps: true,
 });

@@ -4,12 +4,11 @@ const Schema = mongoose.Schema;
 
 
 const boardSchema = new Schema({
-    about: { type: string, required: false },
-    bg_color: { type: string, required: true },
-    bg_photo: { type: string, required: true },
-    board_id: { type: objectId, required: true },
-    title: { type: string, required: true },
-    lists: {type: array, required: false}
+    _id: { type: "objectId", required: true },
+    about: { type: "string", required: false },
+    bg_color: { type: "string", required: true },
+    bg_photo: { type: "string", required: true },
+    title: { type: "string", required: true }
 }, {
   timestamps: true,
 });
