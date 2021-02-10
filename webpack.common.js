@@ -10,11 +10,11 @@ module.exports = {
         filename: "index.[contenthash].js",
         path: path.resolve(__dirname, "public")
     },
-    plugins: [new HtmlWebpackPlugin({
-       template: path.resolve(__dirname, "views/index.ejs"),
-       filename: 'index.html'
-        })
-    ],
+    // plugins: [new HtmlWebpackPlugin({
+      //  template: path.resolve(__dirname, "views/index.ejs"),
+      //  filename: 'index.html'
+        // })
+    // ],
     
     module: {
       rules : [

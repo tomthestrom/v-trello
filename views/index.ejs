@@ -7,12 +7,12 @@
 </head>
 <body>
     <!-- HEADER END -->
-    <%- require('./header.ejs')() %>
+    <%- include('./header.ejs') %>
     <!-- MAIN START -->
     <main class="board">
-    <%- require('./partials/board/management.ejs')() %>
+    <%- include('./partials/board/management.ejs') %>
         <div class="list-deck">
-    <%- require('./partials/deck/list.ejs')() %>
+    <%- include('./partials/deck/list.ejs') %>
         </div>
     </main>
 </body>
