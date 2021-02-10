@@ -9,7 +9,7 @@ module.exports = merge(common, {
     mode: "production",
 
     plugins: [new CleanWebpackPlugin(), new MiniCssExtractPlugin({
-        filename: "/style.[contenthash].css"
+        filename: "style.[contenthash].css"
     })],
 
     module: {

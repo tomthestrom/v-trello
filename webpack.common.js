@@ -8,12 +8,12 @@ module.exports = {
     entry: [path.resolve(__dirname, "assets/js/index.js")],
     output: {
         filename: "index.[contenthash].js",
-        path: path.resolve(__dirname, "public")
+        path: path.resolve(__dirname, "public"),
+        publicPath: './'
     },
     plugins: [new HtmlWebpackPlugin({
        template: path.resolve(__dirname, "views/main.ejs"),
        filename: '../views/index.ejs',
-       minify:  false
       })
     ],
     
@@ -28,8 +28,7 @@ module.exports = {
                 ]
         },
         { test: /\.ejs$/i,
-          use: ["html-loader"],
-          // type: "asset/source"
+          use: ["html-loader"]
         }
       ]
     }
