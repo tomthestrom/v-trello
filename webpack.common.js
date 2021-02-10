@@ -10,11 +10,12 @@ module.exports = {
         filename: "index.[contenthash].js",
         path: path.resolve(__dirname, "public")
     },
-    // plugins: [new HtmlWebpackPlugin({
-      //  template: path.resolve(__dirname, "views/index.ejs"),
-      //  filename: 'index.html'
-        // })
-    // ],
+    plugins: [new HtmlWebpackPlugin({
+       template: path.resolve(__dirname, "views/main.ejs"),
+       filename: '../views/index.ejs',
+       minify:  false
+      })
+    ],
     
     module: {
       rules : [
@@ -26,7 +27,10 @@ module.exports = {
                   "sass-loader"
                 ]
         },
-        { test: /\.ejs$/i, use: [ { loader: 'ejs-easy-loader' } ] }
+        { test: /\.ejs$/i,
+          use: ["html-loader"],
+          // type: "asset/source"
+        }
       ]
     }
 
