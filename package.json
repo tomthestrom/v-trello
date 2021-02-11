@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start-full": "DEBUG=v-trello nodemon ./bin/www",
+    "start-full": "DEBUG=v-trello nodemon ./bin/www & webpack --config webpack.dev.js",
     "webpack-prod": "webpack --config webpack.prod.js",
     "frontend": "webpack --config webpack.dev.js"
   },

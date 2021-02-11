@@ -33,6 +33,7 @@ export default class TitleInput extends HTMLInputElement {
         setMimickedElementCloneInDOM();
         updateInnerTextFromMimickedElement(mimickedElement);
         updateWidth();
+        this.select();
       }
 
       const input = function (event) {

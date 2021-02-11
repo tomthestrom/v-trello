@@ -10,7 +10,9 @@ export default class Title extends HTMLHeadingElement {
   
 
     connectedCallback() {
-      console.log('Title connected.');
+      const eventHandlers = this.eventHandlers.call(this);
+
+      this.addEventListener('click', eventHandlers.click);
     }
 
     hide () {
@@ -18,6 +20,15 @@ export default class Title extends HTMLHeadingElement {
       this.hidden = true;
   
       return this;
+    }
+
+    eventHandlers () {
+      const inputForTitle = document.getElementById('board-title-input');
+
+      const click = function () {
+          inputForTitle.focus()
+      }  
+      return { click }
     }
   }
 

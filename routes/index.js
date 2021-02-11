@@ -5,7 +5,6 @@ let Board = require('../models/board.model');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  debug('do pice')
   Board.findOne({}, function (err, obj) {
     debug(obj)
   });
