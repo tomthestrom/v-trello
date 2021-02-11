@@ -14,7 +14,8 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "mongoose": "^5.11.13"
+    "mongoose": "^5.11.13",
+    "ws": "^7.4.3"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
