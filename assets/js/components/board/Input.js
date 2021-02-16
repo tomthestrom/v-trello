@@ -1,5 +1,5 @@
-import { observable as observableMixin } from "../../mixins/observable";
-import stringHelper from "../../utils/stringHelper";
+import { replaceSpaceWithNBSP } from "../../utils/stringHelper";
+import socketConnection from "../../services/websocket"
 
 // import boardService from '../../services/board';
 /**
@@ -44,6 +44,14 @@ export default class TitleInput extends HTMLInputElement {
       const focusout = function () {
         mimickedElementCloneInDOM.remove();
         mimickedElementCloneInDOM = undefined;
+
+        const updateObject = {
+          id: "6022b00811c58d5b8d2c6943",
+          type: "boardTitle",
+          value: this.value
+        };
+
+        socketConnection.send(JSON.stringify(updateObject));
       }
 
       const prepareMimickedElementClone = function (mimickedElement) {
@@ -60,7 +68,7 @@ export default class TitleInput extends HTMLInputElement {
      
       const setMimickedElementCloneInDOM = () => mimickedElementCloneInDOM = this.nextElementSibling;
 
-      const updateMimickedElementInnerHTMLFromThis = text => mimickedElementCloneInDOM.innerHTML = stringHelper.replaceSpaceWithNBSP(text);
+      const updateMimickedElementInnerHTMLFromThis = text => mimickedElementCloneInDOM.innerHTML = replaceSpaceWithNBSP(text);
 
       return {
         focus, focusout, input

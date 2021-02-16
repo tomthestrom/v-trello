@@ -6,8 +6,8 @@ require('dotenv').config();
 
 const path = require("path");
 
-const indexRouter = require("./routes/index");
-const boardRouter = require("./routes/board");
+const indexRouter = require("./controllers/index");
+const boardRouter = require("./controllers/board");
 
 const app = express();
 app.use(cors());

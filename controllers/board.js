@@ -9,7 +9,7 @@ router.route('/add').post((req, res) => {
 
   const newBoard = new Board({
     title,
-    description,
+    description
   });
 
   newBoard.save()
