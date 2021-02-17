@@ -1,3 +1,4 @@
+import socketConnection from '../../services/websocket';
 export default class TitleTextArea extends HTMLTextAreaElement {
   constructor () {
     super();
@@ -12,15 +13,7 @@ export default class TitleTextArea extends HTMLTextAreaElement {
     const eventHandlers = this.eventHandlers.call(this);
 
     this.addEventListener('input', eventHandlers.input);
-    this.addEventListener('focusout', function () {
-      const updateObject = {
-        id: '6022b00811c58d5b8d2c6943',
-        type: 'boardTitle',
-        value: this.value
-      };
-
-      socketConnection.send(JSON.stringify(updateObject));
-    });
+    this.addEventListener('focusout', eventHandlers.focus);
   }
 
   eventHandlers () {
@@ -31,8 +24,18 @@ export default class TitleTextArea extends HTMLTextAreaElement {
       }
     };
 
+    const focus = () => {
+      const updateObject = {
+        id: '6022b00811c58d5b8d2c6943',
+        type: 'deckTitle',
+        value: this.value
+      };
+
+      socketConnection.send(JSON.stringify(updateObject));
+    }
+
     return {
-      input
+      input, focus
     };
   }
 }

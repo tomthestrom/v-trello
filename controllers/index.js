@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var debug = require('debug')('v-trello');
 const BoardModel = require('../models/board.model');
+// const ListModel = require('../models/list.model');
 const wsServer = require('../services/ws-server');
 //gonna get swapped if the project grows to having more than one board :D
 const getBoardRecord = () => BoardModel.findOne();
@@ -44,6 +45,8 @@ wsServer.on('connection', socket => {
             })
             // socket.send(updateObjectStringified);
           })
+      } else if (parsedMessage.type === "deckTitle") {
+        debug(message)
       }
     }
   );
