@@ -15,15 +15,6 @@ export default class Title extends HTMLHeadingElement {
       const eventHandlers = this.eventHandlers.call(this);
 
       this.addEventListener('click', eventHandlers.click);
-      // socketConnection.addEventListener('message', function (message) {
-      //   const parsedMessage = JSON.parse(message.data);
-
-      //   if (parsedMessage.type === "boardTitle") {
-      //     console.log(this)
-      //       this.innerText = (parsedMessage.value)
-      //     }
-      // }
-      // )
       socketConnection.addEventListener('message', eventHandlers.message.bind(this))
     }
 
@@ -37,12 +28,9 @@ export default class Title extends HTMLHeadingElement {
     eventHandlers () {
       const inputForTitle = document.getElementById('board-title-input');
 
-      const click = function () {
-          inputForTitle.focus()
-      };
+      const click = () => inputForTitle.focus();
       
       const message = function (message) {
-        console.log(this)
         const parsedMessage = JSON.parse(message.data);
 
         if (parsedMessage.type === "boardTitle") {
