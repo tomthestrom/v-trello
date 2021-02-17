@@ -1,5 +1,5 @@
-import { replaceSpaceWithNBSP } from "../../utils/stringHelper";
-import socketConnection from "../../services/websocket"
+import { replaceSpaceWithNBSP } from '../../utils/stringHelper';
+import socketConnection from '../../services/websocket';
 
 // import boardService from '../../services/board';
 /**
@@ -7,74 +7,73 @@ import socketConnection from "../../services/websocket"
  * when focused - appears and dynamically grows mimicking the <h1> behavior
  */
 export default class TitleInput extends HTMLInputElement {
-    constructor() {
-      super();
-    }
+  constructor () {
+    super();
+  }
 
-    connectedCallback() {
-      const eventHandlers = this.eventHandlers.call(this);
+  connectedCallback () {
+    const eventHandlers = this.eventHandlers.call(this);
 
-      this.addEventListener('focus', eventHandlers.focus);
-      this.addEventListener('input', eventHandlers.input);
-      this.addEventListener('focusout', eventHandlers.focusout);
-    }
-  //@TODO: DRY stuff called in each event handler
-    eventHandlers() {
-      // updates once it's been inserted/removed into/from DOM
-      let mimickedElementCloneInDOM  = undefined;
-      const mimickedElementSelector  = this.getAttribute('mimicks-element');
+    this.addEventListener('focus', eventHandlers.focus);
+    this.addEventListener('input', eventHandlers.input);
+    this.addEventListener('focusout', eventHandlers.focusout);
+  }
 
-      const focus = function () {
-        const mimickedElement = document.querySelector(mimickedElementSelector);
-        const mimickedElementClone = prepareMimickedElementClone(mimickedElement);
+  // @TODO: DRY stuff called in each event handler
+  eventHandlers () {
+    // updates once it's been inserted/removed into/from DOM
+    let mimickedElementCloneInDOM;
+    const mimickedElementSelector = this.getAttribute('mimicks-element');
 
-        this.insertAdjacentElement('afterend', mimickedElementClone);
+    const focus = function () {
+      const mimickedElement = document.querySelector(mimickedElementSelector);
+      const mimickedElementClone = prepareMimickedElementClone(mimickedElement);
 
-        setMimickedElementCloneInDOM();
-        updateInnerTextFromMimickedElement(mimickedElement);
-        updateWidth();
-        this.select();
-      }
+      this.insertAdjacentElement('afterend', mimickedElementClone);
 
-      const input = function (event) {
-        updateMimickedElementInnerHTMLFromThis(event.target.value);
-        updateWidth();
-      }
+      setMimickedElementCloneInDOM();
+      updateInnerTextFromMimickedElement(mimickedElement);
+      updateWidth();
+      this.select();
+    };
 
-      const focusout = function () {
-        mimickedElementCloneInDOM.remove();
-        mimickedElementCloneInDOM = undefined;
+    const input = function (event) {
+      updateMimickedElementInnerHTMLFromThis(event.target.value);
+      updateWidth();
+    };
 
-        const updateObject = {
-          id: "6022b00811c58d5b8d2c6943",
-          type: "boardTitle",
-          value: this.value
-        };
+    const focusout = function () {
+      mimickedElementCloneInDOM.remove();
+      mimickedElementCloneInDOM = undefined;
 
-        socketConnection.send(JSON.stringify(updateObject));
-      }
+      const updateObject = {
+        id: '6022b00811c58d5b8d2c6943',
+        type: 'boardTitle',
+        value: this.value
+      };
 
-      const prepareMimickedElementClone = function (mimickedElement) {
-        const mimickedElementClone = mimickedElement.cloneNode(true);
-        mimickedElementClone.id   += '-clone';
-        mimickedElementClone.setAttribute("style", "position: absolute; color: transparent; z-index: -5;");
-        
-        return mimickedElementClone;
-    }
+      socketConnection.send(JSON.stringify(updateObject));
+    };
 
-      const updateWidth = () => this.style.width = mimickedElementCloneInDOM.getBoundingClientRect().width + 'px';
+    const prepareMimickedElementClone = function (mimickedElement) {
+      const mimickedElementClone = mimickedElement.cloneNode(true);
+      mimickedElementClone.id += '-clone';
+      mimickedElementClone.setAttribute('style', 'position: absolute; color: transparent; z-index: -5;');
 
-      const updateInnerTextFromMimickedElement = (mimickedElement) => this.value = mimickedElement.innerText;
-     
-      const setMimickedElementCloneInDOM = () => mimickedElementCloneInDOM = this.nextElementSibling;
+      return mimickedElementClone;
+    };
 
-      const updateMimickedElementInnerHTMLFromThis = text => mimickedElementCloneInDOM.innerHTML = replaceSpaceWithNBSP(text);
+    const updateWidth = () => this.style.width = mimickedElementCloneInDOM.getBoundingClientRect().width + 'px';
 
-      return {
-        focus, focusout, input
-      }
-    }
+    const updateInnerTextFromMimickedElement = (mimickedElement) => this.value = mimickedElement.innerText;
 
+    const setMimickedElementCloneInDOM = () => mimickedElementCloneInDOM = this.nextElementSibling;
 
+    const updateMimickedElementInnerHTMLFromThis = text => mimickedElementCloneInDOM.innerHTML = replaceSpaceWithNBSP(text);
+
+    return {
+      focus, focusout, input
+    };
+  }
 }
-customElements.define('board-title-input', TitleInput, {extends: "input"});
+customElements.define('board-title-input', TitleInput, { extends: 'input' });
