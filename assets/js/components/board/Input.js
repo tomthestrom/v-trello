@@ -18,7 +18,7 @@ export default class TitleInput extends HTMLInputElement {
       this.addEventListener('input', eventHandlers.input);
       this.addEventListener('focusout', eventHandlers.focusout);
     }
-
+  //@TODO: DRY stuff called in each event handler
     eventHandlers() {
       // updates once it's been inserted/removed into/from DOM
       let mimickedElementCloneInDOM  = undefined;

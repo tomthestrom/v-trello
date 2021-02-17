@@ -12,6 +12,16 @@ export default class TitleTextArea extends HTMLTextAreaElement {
         const eventHandlers = this.eventHandlers.call(this);
 
         this.addEventListener('input', eventHandlers.input);
+        this.addEventListener('focusout', function() {
+            
+        const updateObject = {
+          id: "6022b00811c58d5b8d2c6943",
+          type: "boardTitle",
+          value: this.value
+        };
+
+        socketConnection.send(JSON.stringify(updateObject));
+        })
     }
 
     eventHandlers () {
@@ -23,7 +33,7 @@ export default class TitleTextArea extends HTMLTextAreaElement {
         }
 
         return {
-            input
+            input, 
         }
     }
 
