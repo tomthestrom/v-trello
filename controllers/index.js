@@ -37,9 +37,12 @@ wsServer.on('connection', socket => {
               value: queryResult.title
             };
 
-            const updateObjectStringified = JSON.stringify(updateObject)
-            debug(updateObjectStringified);
-            socket.send((updateObjectStringified));
+            const updateObjectStringified = JSON.stringify(updateObject);
+
+            wsServer.clients.forEach((client) => {
+              client.send(updateObjectStringified);
+            })
+            // socket.send(updateObjectStringified);
           })
       }
     }
