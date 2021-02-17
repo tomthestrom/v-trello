@@ -14,7 +14,15 @@ app.use(cors());
 app.use(express.json());
 
 const atlasUri = process.env.ATLAS_URI;
-mongoose.connect(atlasUri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+mongoose.connect(
+  atlasUri, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false 
+  }
+);
+
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log('Mongo DB connection established successfully')
