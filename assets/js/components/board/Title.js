@@ -1,11 +1,13 @@
+import socketConnection from "../../services/websocket";
+
 export default class Title extends HTMLHeadingElement {
     constructor () {
       super();
       // this.boardService = boardService;
     }
     
-    updateBoardTitle (newTitle) {
-      console.log(newTitle)
+    updateText (newTitle) {
+      this.innerText = newTitle;
     }
   
 
@@ -13,6 +15,16 @@ export default class Title extends HTMLHeadingElement {
       const eventHandlers = this.eventHandlers.call(this);
 
       this.addEventListener('click', eventHandlers.click);
+      // socketConnection.addEventListener('message', function (message) {
+      //   const parsedMessage = JSON.parse(message.data);
+
+      //   if (parsedMessage.type === "boardTitle") {
+      //     console.log(this)
+      //       this.innerText = (parsedMessage.value)
+      //     }
+      // }
+      // )
+      socketConnection.addEventListener('message', eventHandlers.message.bind(this))
     }
 
     hide () {
@@ -27,8 +39,18 @@ export default class Title extends HTMLHeadingElement {
 
       const click = function () {
           inputForTitle.focus()
-      }  
-      return { click }
+      };
+      
+      const message = function (message) {
+        console.log(this)
+        const parsedMessage = JSON.parse(message.data);
+
+        if (parsedMessage.type === "boardTitle") {
+          this.innerText = (parsedMessage.value)
+        }
+      }
+
+      return { click, message }
     }
   }
 

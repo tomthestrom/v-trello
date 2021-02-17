@@ -28,7 +28,19 @@ wsServer.on('connection', socket => {
       const parsedMessage = JSON.parse(message);
       if (parsedMessage.type === "boardTitle") {
         //after change emit through ws to component
-        updateBoardTitleRecord(parsedMessage.id, parsedMessage.value).then(queryResult => debug(queryResult));
+        updateBoardTitleRecord(parsedMessage.id, parsedMessage.value).
+        then(
+          queryResult => {
+            const updateObject = {
+              id: "6022b00811c58d5b8d2c6943",
+              type: "boardTitle",
+              value: queryResult.title
+            };
+
+            const updateObjectStringified = JSON.stringify(updateObject)
+            debug(updateObjectStringified);
+            socket.send((updateObjectStringified));
+          })
       }
     }
   );

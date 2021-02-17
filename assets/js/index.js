@@ -6,23 +6,23 @@ import TextArea from "./components/list/TextArea"
 import socketConnection from "./services/websocket"
 //@TODO: create a custom element register obj
 
-// Create WebSocket connection.
-socketConnection.onopen = function (e) {
-}
+
+
+
 
 // // Connection opened
-        // socket.addEventListener('open', function (event) {
-        //     console.log('open')
-        //     socket.send('Hello Server!');
-        // });
+socketConnection.addEventListener('open', function (event) {
+    console.log('open')
+//     socketConnection.send('Hello Server!');
+});
 
-        // socket.addEventListener('error', function(error) {
-        //     console.error(error);
-        // });
+socketConnection.addEventListener('error', function(error) {
+    console.error(error);
+});
 
-        // socket.addEventListener('message', function(message) {
-        //     console.log(message)
-        // })
+socketConnection.addEventListener('message', function(message) {
+    console.log(message.data)
+})
 
 // // Listen for messages
 // socket.addEventListener('message', function (event) {
