@@ -111,6 +111,15 @@
     }
 
     &--add-list {
-        
+        color: var(--color-list-card-background);
+        padding: 2rem;
+        height: 3.2rem;
+        width: 26.4rem;
+
+        svg {
+            fill: currentColor; 
+            height: 1.2rem;
+            width: 1.2rem;
+        }
     }
 }
