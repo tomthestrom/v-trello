@@ -20,6 +20,10 @@
         align-items: center;
     }
 
+    &__list-footer {
+        display: flex;
+    }
+
     &__title {
         font-size: 1.8rem;
     }
