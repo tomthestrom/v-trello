@@ -86,17 +86,17 @@
         </div>
     </div>
 </div>
-<div class="list-deck__list">
+<add-list class="list-deck__list">
     <div class="list-deck__list-header">
-        <textarea is="deck-title-textarea"class="list-deck__title-input">Second list</textarea>
+        <input id="add-list-input" class="list-deck__title-input list-deck__title-input--add-list" type="text">
     </div>
     <div class="list-deck__list-footer">
-        <button class="btn btn--add-list">Add list</button>
-        <button class="btn btn--close-add-list">
+        <button id="add-list-btn-add" class="btn btn--add-list">Add list</button>
+        <button id="add-list-btn-close" class="btn btn--close-add-list">
             &#x2715;
         </button>
     </div>
-</div>
+</add-list>
 <button class="btn btn--bman btn--add-another-list">
     <svg>
         <use xlink:href="./icons/sprite.svg#plus"></use>

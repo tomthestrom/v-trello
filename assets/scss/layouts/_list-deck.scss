@@ -45,7 +45,7 @@
         overflow: hidden;
 
 
-        &:focus {
+        &:focus, &--add-list {
             background-color: var(--color-deck-list-header-background--focus);
             border: 2px solid var(--color-primary-blue);
             border-radius: 4px;
