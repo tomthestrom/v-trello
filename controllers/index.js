@@ -47,6 +47,8 @@ wsServer.on('connection', socket => {
           })
       } else if (parsedMessage.type === "deckTitle") {
         debug(message)
+      } else if (parsedMessage.type === "newList") {
+        debug(message)
       }
     }
   );
