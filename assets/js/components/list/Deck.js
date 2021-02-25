@@ -1,5 +1,6 @@
 import throttle from 'lodash/throttle';
-import { deckDragService } from "../../services/deckDrag";
+import { listDragDirection } from "../../services/deck/listDragDirection";
+import { listDragPlaceHolder } from "../../services/deck/listDragPlaceHolder";
 /**
  * Encapsulates logic to drag&drop the cards on the deck
  */
@@ -58,26 +59,29 @@ export default class Deck extends HTMLElement {
             const currentXPosition = e.clientX;
             
             const container = this.querySelectorAll('[drag-active=false]');
-            const draggable = deckDragService.getDraggedList();
+            const draggable = listDragDirection.getDraggedList();
+            //gets inserted on possible drop position
+            const placeHolder = listDragPlaceHolder.getDraggedListPlaceHolder();
             //helps when calculating the edges of the dragged list, we wanna move the lists once the right/left edge crosses over the half of the neighboring list (as in orig trello) 
-            const draggableDistanceTravelled = Math.abs(deckDragService.getDragStartCoordinate() - currentXPosition);
+            const draggableDistanceTravelled = Math.abs(listDragDirection.getDragStartCoordinate() - currentXPosition);
 
-            deckDragService.setCurrentDirection(currentXPosition);
-            
-            if (deckDragService.isDragDirectionRight()) {
-                const draggableRightEdge = deckDragService.getDraggedListRightEdge() + draggableDistanceTravelled;
+            listDragDirection.setCurrentDirection(currentXPosition);
+            if (listDragDirection.isDragDirectionRight()) {
+                const draggableRightEdge = listDragDirection.getDraggedListRightEdge() + draggableDistanceTravelled;
                 const afterElement = getClosestToInsertAfter(container, draggableRightEdge).element; 
 
-                if (afterElement !== undefined) {
-                    afterElement.after(draggable);
+                if (afterElement !== undefined && listDragPlaceHolder.placeHolderNotInsertedAfter(afterElement)) {
+                    afterElement.after(placeHolder);
+                    listDragPlaceHolder.setPlaceHolderInsertedAfter(afterElement)
                 }
                 
             } else {
-                const draggableLeftEdge = deckDragService.getDraggedListLeftEdge() - draggableDistanceTravelled;
+                const draggableLeftEdge = listDragDirection.getDraggedListLeftEdge() - draggableDistanceTravelled;
                 const beforeElement = getClosestToInsertBefore(container, draggableLeftEdge).element;
 
-                if (beforeElement !== undefined) {
-                    beforeElement.before(draggable);
+                if (beforeElement !== undefined && listDragPlaceHolder.placeHolderNotInsertedBefore(beforeElement)) {
+                    beforeElement.before(placeHolder);
+                    listDragPlaceHolder.setPlaceHolderInsertedBefore(beforeElement)
                 } 
             }
 

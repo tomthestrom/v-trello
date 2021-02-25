@@ -1,4 +1,5 @@
-import { deckDragService } from "../../services/deckDrag";
+import { listDragDirection } from "../../services/deck/listDragDirection";
+import { listPlaceHolder } from "../../services/deck/listDragPlaceHolder";
 
 export default class CardList extends HTMLElement {
     constructor () {
@@ -7,14 +8,15 @@ export default class CardList extends HTMLElement {
     }
     connectedCallback() {
         this.addEventListener('dragstart', function (e) {
-            deckDragService.setDraggedList(this);
-            deckDragService.setDragStartCoordinate(e.clientX);
+            listDragDirection.setDragStartCoordinate(e.clientX);
+            listDragDirection.setDraggedList(this);
+            listDragDirection.setDraggedListPlaceHolder();
 
             this.setAttribute('drag-active', true);
         });
 
         this.addEventListener('dragend', function () {
-            deckDragService.resetState();
+            listDragDirection.resetState();
             this.setAttribute('drag-active', false);
         })
 
