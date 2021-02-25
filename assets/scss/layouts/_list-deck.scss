@@ -1,6 +1,7 @@
 .list-deck {
 
     display: flex;
+    // overflow-x: scroll;
     color: rgb(23, 43, 77);
 
     & > * {

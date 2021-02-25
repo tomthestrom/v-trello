@@ -46,7 +46,7 @@ wsServer.on('connection', socket => {
             // socket.send(updateObjectStringified);
           })
       } else if (parsedMessage.type === "deckTitle") {
-        debug(message)
+        //running
       } else if (parsedMessage.type === "newList") {
         const newList = new List({
           board_id: parsedMessage.id,
