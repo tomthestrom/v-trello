@@ -1,5 +1,5 @@
 import { illegalSetterUseMessage } from '../../../../../shared/error-messages';
-
+import DropZone from "../../../components/list/DropZone"
 /**
  * takes care of the state of placeholder insertion when dragging over possible drop elements
  */
@@ -16,11 +16,11 @@ class ListPlaceHolder {
     if (this._placeHolder !== undefined) {
       throw new Error(illegalSetterUseMessage('createPlaceHolder'));
     }
-    const placeHolder = document.createElement('div');
-    placeHolder.style.height = this.listDimensions.height + 'px';
-    placeHolder.style.minWidth = this.listDimensions.width + 'px';
+    const dropZone = new DropZone();
+    dropZone.height = this.listDimensions.height;
+    dropZone.width = this.listDimensions.width;
 
-    return placeHolder;
+    return dropZone;
   }
 
   get placeHolder () {
