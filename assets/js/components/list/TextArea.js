@@ -32,7 +32,7 @@ export default class TitleTextArea extends HTMLTextAreaElement {
       };
 
       socketConnection.send(JSON.stringify(updateObject));
-    }
+    };
 
     return {
       input, focus

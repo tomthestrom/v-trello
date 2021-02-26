@@ -4,8 +4,8 @@ import Title from './components/board/Title';
 import Input from './components/board/Input';
 import TextArea from './components/list/TextArea';
 import AddList from './components/list/AddList';
-import CardList from './components/list/CardList'
-import Deck from './components/list/Deck'
+import CardList from './components/list/CardList';
+import Deck from './components/list/Deck';
 import socketConnection from './services/websocket';
 // @TODO: create a custom element register obj
 
