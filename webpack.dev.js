@@ -7,7 +7,7 @@ const outputPath = path.resolve(__dirname, "public");
 
 module.exports = merge(common, {
      entry: [
-      'webpack-plugin-serve/client' // ← important: this is required, where the magic happens in the browser
+      // 'webpack-plugin-serve/client' // ← important: this is required, where the magic happens in the browser
     ],
     mode: "development",
     output: {

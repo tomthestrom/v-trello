@@ -2,7 +2,24 @@ import { listDragManager } from '../../services/deck/listDragManager';
 export default class CardList extends HTMLElement {
   constructor () {
     super();
-    this.setAttribute('drag-active', false);
+    this.dragActive = false;
+    this.topLeft = this.getBoundingClientRect().x;
+  }
+
+  set dragActive (isActive) {
+      this.setAttribute('drag-active', Boolean(isActive))
+  }
+
+  set topLeft (x) {
+    this._topLeft = x;
+  }
+
+  get topLeft () {
+    return this._topLeft;
+  }
+
+  resetTopLeft () {
+    this._topLeft = this.getBoundingClientRect().x;
   }
 
   connectedCallback () {
@@ -10,14 +27,13 @@ export default class CardList extends HTMLElement {
       listDragManager.init(this);
       listDragManager.getListDragDirectionService().setDragStartCoordinate(e.clientX);
         
-      this.style.display = "none";
-      this.setAttribute('drag-active', true);
+      this.dragActive = true;
     });
+
 
     this.addEventListener('dragend', function () {
       listDragManager.resetState();
-      this.style.display = "block";
-      this.setAttribute('drag-active', false);
+      this.dragActive = false;
     });
   }
 }

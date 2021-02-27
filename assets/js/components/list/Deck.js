@@ -57,19 +57,16 @@ export default class Deck extends HTMLElement {
       const container = this.querySelectorAll('[drag-active=false]');
 
       /**
-             * Dragging related state handler services
-             */
+        * Dragging related state handler services
+      */
       const draggedListDimensionsService = listDragManager.getListDimensionsService();
       const dragDirectionService = listDragManager.getListDragDirectionService();
       const placeHolderService = listDragManager.getListPlaceHolderService();
 
-      // helps when calculating the edges of the dragged list, we wanna move the lists once the right/left edge crosses over the half of the neighboring list (as in orig trello)
-      const draggedListDistanceTravelled = Math.abs(dragDirectionService.getDragStartCoordinate() - currentXPosition);
-
       dragDirectionService.setCurrentDirection(currentXPosition);
 
       if (dragDirectionService.isDragDirectionRight()) {
-        const draggedListCurrentRightEdge = draggedListDimensionsService.rightEdge + draggedListDistanceTravelled;
+        const draggedListCurrentRightEdge = draggedListDimensionsService.rightEdge + dragDirectionService.draggedListDistanceTravelled(currentXPosition);
         const afterElement = getClosestToInsertAfter(container, draggedListCurrentRightEdge);
 
         if (afterElement !== undefined && placeHolderService.insertedBeforeElement?.id !== afterElement.id) {
@@ -77,9 +74,12 @@ export default class Deck extends HTMLElement {
           placeHolderService.insertedAfterElement = afterElement;
         }
       } else {
-        const draggedListCurrentLeftEdge = draggedListDimensionsService.leftEdge - draggedListDistanceTravelled;
+        const draggedListCurrentLeftEdge = draggedListDimensionsService.leftEdge - dragDirectionService.draggedListDistanceTravelled(currentXPosition);
         const beforeElement = getClosestToInsertBefore(container, draggedListCurrentLeftEdge);
 
+        listDragManager.getList().style.position = "fixed";
+
+        listDragManager.getList().style.left = draggedListCurrentLeftEdge + "px";
         if (beforeElement !== undefined && placeHolderService.insertedBeforeElement?.id !== beforeElement.id) {
           beforeElement.before(placeHolderService.placeHolder);
           placeHolderService.insertedBeforeElement = beforeElement;

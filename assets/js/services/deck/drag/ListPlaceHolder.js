@@ -18,7 +18,7 @@ class ListPlaceHolder {
     }
     const dropZone = new DropZone();
     dropZone.height = this.listDimensions.height;
-    dropZone.width = this.listDimensions.width;
+    dropZone.minWidth = this.listDimensions.width;
 
     return dropZone;
   }

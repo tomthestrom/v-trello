@@ -38,6 +38,10 @@ class ListDragDirection {
   isDragDirectionRight () {
     return this.getCurrentDirection() === this.DIRECTION_RIGHT;
   }
+
+  draggedListDistanceTravelled (currentXPosition) {
+    return Math.abs(this.getDragStartCoordinate() - currentXPosition);
+  } 
 }
 
 export { ListDragDirection };
