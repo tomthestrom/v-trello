@@ -4,10 +4,11 @@ export default class CardList extends HTMLElement {
     super();
     this.dragActive = false;
     this.topLeft = this.getBoundingClientRect().x;
+    console.log('cardlist');
   }
 
   set dragActive (isActive) {
-      this.setAttribute('drag-active', Boolean(isActive))
+    this.setAttribute('data-drag-active', Boolean(isActive));
   }
 
   set topLeft (x) {
@@ -25,17 +26,22 @@ export default class CardList extends HTMLElement {
   connectedCallback () {
     this.addEventListener('dragstart', function (e) {
       listDragManager.init(this);
-      listDragManager.getListDragDirectionService().setDragStartCoordinate(e.clientX);
-        
+      listDragManager.getListDragDirectionService().setStartCoord(e.clientX);
+
+      this.style.transform = 'rotate(3deg)';
+
+      const crt = this.cloneNode(true);
+      crt.style.display = 'none'; /* or visibility: hidden, or any of the above */
+      // document.body.appendChild(crt);
+      e.dataTransfer.setDragImage(crt, 0, 0);
+
       this.dragActive = true;
     });
 
-
     this.addEventListener('dragend', function () {
       listDragManager.resetState();
+      this.style.transform = 'none';
       this.dragActive = false;
     });
   }
 }
-
-customElements.define('card-list', CardList);

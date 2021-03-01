@@ -76,4 +76,3 @@ export default class TitleInput extends HTMLInputElement {
     };
   }
 }
-customElements.define('board-title-input', TitleInput, { extends: 'input' });

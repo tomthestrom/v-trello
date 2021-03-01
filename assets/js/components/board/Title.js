@@ -40,5 +40,3 @@ export default class Title extends HTMLHeadingElement {
     return { click, message };
   }
 }
-
-customElements.define('board-title', Title, { extends: 'h1' });

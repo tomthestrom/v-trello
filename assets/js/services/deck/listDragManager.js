@@ -2,6 +2,8 @@ import { illegalSetterUseMessage } from '../../../../shared/error-messages';
 import { ListDimensions } from './drag/ListDimensions';
 import { ListDragDirection } from './drag/ListDragDirection';
 import { ListPlaceHolder } from './drag/ListPlaceHolder';
+import { ListMover } from './drag/ListMover';
+
 /**
  * takes care of the state of direction when dragging
  */
@@ -10,6 +12,7 @@ const listDragManager = (function () {
   let listDimensionsService;
   let listPlaceHolderService;
   let listDragDirectionService;
+  let moveListService;
 
   const setList = (element) => {
     if (list !== undefined) {
@@ -21,6 +24,8 @@ const listDragManager = (function () {
   const setListDimensionsService = (list) => new ListDimensions(list);
   const setListPlaceHolderService = (list, ListDimensions) => new ListPlaceHolder(list, ListDimensions);
   const setListDragDirectionService = (list, ListDimensions) => new ListDragDirection(list, ListDimensions);
+  const setMoveListService = (list) => new ListMover(list);
+
   return {
 
     init (element) {
@@ -28,6 +33,8 @@ const listDragManager = (function () {
       listDimensionsService = setListDimensionsService(list);
       listPlaceHolderService = setListPlaceHolderService(listDimensionsService);
       listDragDirectionService = setListDragDirectionService(list, listDimensionsService);
+      moveListService = setMoveListService(list);
+      console.log(moveListService)
     },
 
     getList () {
@@ -46,8 +53,12 @@ const listDragManager = (function () {
       return listDragDirectionService;
     },
 
+    getMoveListService () {
+      return moveListService;
+    },
+
     resetState () {
-      [list, listDimensionsService, listPlaceHolderService, listDragDirectionService] = [undefined];
+      [list, listDimensionsService, listPlaceHolderService, listDragDirectionService, moveListService] = [undefined];
     }
 
   };

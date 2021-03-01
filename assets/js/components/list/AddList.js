@@ -29,4 +29,3 @@ export default class AddList extends HTMLElement {
     };
   }
 }
-customElements.define('add-list', AddList);

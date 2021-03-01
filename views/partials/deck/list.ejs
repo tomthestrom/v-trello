@@ -1,4 +1,4 @@
-    <div id="1" is="card-list" class="list-deck__list" draggable="true" data-draggable-list>
+    <card-list id="1" is="card-list" class="list-deck__list" draggable="true" data-draggable-list>
         <div class="list-deck__list-header">
             <h2 class="list-deck__title hidden">Things to do</h2>
             <textarea is="deck-title-textarea"class="list-deck__title-input">Things to do</textarea>
@@ -40,10 +40,10 @@
                 </button>
             </div>
         </div>
-    </div>
+    </card-list>
 
 <!-- Druhy zoznam dummy-->
-    <div id="2" is="card-list" class="list-deck__list" draggable="true" data-draggable-list>
+    <card-list id="2" is="card-list" class="list-deck__list" draggable="true" data-draggable-list>
         <div class="list-deck__list-header">
             <h2 class="list-deck__title hidden">Things to do</h2>
             <textarea is="deck-title-textarea"class="list-deck__title-input">Second list</textarea>
@@ -69,6 +69,16 @@
                     </svg>
                 </button>
             </li>
+            <li class="list-deck__card">
+                <h3 class="list-deck__card-title">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+                </h3>
+                <button class="btn btn--list btn--edit-card">
+                    <svg class="list-deck__icon">
+                        <use xlink:href="./icons/sprite.svg#edit"></use>
+                    </svg>
+                </button>
+            </li>
         </ul>
         <div class="list-deck__list-footer">
             <div class="list-deck__add-card">
@@ -85,8 +95,8 @@
                 </button>
             </div>
         </div>
-    </div>
-    <div id="3" is="card-list" class="list-deck__list" draggable="true" data-draggable-list>
+    </card-list>
+    <card-list id="3" is="card-list" class="list-deck__list" draggable="true" data-draggable-list>
         <div class="list-deck__list-header">
             <h2 class="list-deck__title hidden">Things to do</h2>
             <textarea is="deck-title-textarea"class="list-deck__title-input">Third list</textarea>
@@ -128,8 +138,8 @@
                 </button>
             </div>
         </div>
-    </div>
-    <div  id="4" is="card-list" class="list-deck__list" draggable="true" data-draggable-list>
+    </card-list>
+    <card-list  id="4" is="card-list" class="list-deck__list" draggable="true" data-draggable-list>
         <div class="list-deck__list-header">
             <h2 class="list-deck__title hidden">Things to do</h2>
             <textarea is="deck-title-textarea"class="list-deck__title-input">Fourth list</textarea>
@@ -138,16 +148,6 @@
             <li class="list-deck__card">
                 <h3 class="list-deck__card-title">
                     Say Hello World
-                </h3>
-                <button class="btn btn--list btn--edit-card">
-                    <svg class="list-deck__icon">
-                        <use xlink:href="./icons/sprite.svg#edit"></use>
-                    </svg>
-                </button>
-            </li>
-            <li class="list-deck__card">
-                <h3 class="list-deck__card-title">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum quaerat autem libero nemo, necessitatibus inventore incidunt cumque provident vero voluptatem numquam dignissimos nesciunt, ullam saepe iste. Ipsum sapiente distinctio enim.
                 </h3>
                 <button class="btn btn--list btn--edit-card">
                     <svg class="list-deck__icon">
@@ -171,7 +171,7 @@
                 </button>
             </div>
         </div>
-    </div>
+    </card-list>
 <add-list class="list-deck__list">
     <div class="list-deck__list-header">
         <input id="add-list-input" class="list-deck__title-input list-deck__title-input--add-list" type="text">

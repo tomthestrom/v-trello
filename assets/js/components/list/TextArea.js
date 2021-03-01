@@ -39,5 +39,3 @@ export default class TitleTextArea extends HTMLTextAreaElement {
     };
   }
 }
-
-customElements.define('deck-title-textarea', TitleTextArea, { extends: 'textarea' });

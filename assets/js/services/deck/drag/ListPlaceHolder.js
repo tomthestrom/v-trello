@@ -1,5 +1,5 @@
 import { illegalSetterUseMessage } from '../../../../../shared/error-messages';
-import DropZone from "../../../components/list/DropZone"
+import DropZone from '../../../components/list/DropZone';
 /**
  * takes care of the state of placeholder insertion when dragging over possible drop elements
  */
@@ -7,8 +7,8 @@ class ListPlaceHolder {
   constructor (ListDimensions) {
     this.listDimensions = ListDimensions;
     this._placeHolder = this.createPlaceHolder();
-    this.insertedAfterElement;
-    this.insertedBeforeElement;
+    this.insertedAfterEl;
+    this.insertedBeforeEl;
   }
 
   // make sure this method does not get called a second time
@@ -27,21 +27,55 @@ class ListPlaceHolder {
     return this._placeHolder;
   }
 
-  set insertedBeforeElement (element) {
-    this._insertedBeforeElement = element;
+  set insertedBeforeEl (element) {
+    this._insertedBeforeEl = element;
   }
 
-  set insertedAfterElement (element) {
-    this._insertedAfterElement = element;
+  set insertedAfterEl (element) {
+    this._insertedAfterEl = element;
   }
 
-  get insertedBeforeElement () {
-    return this._insertedBeforeElement;
+  get insertedBeforeEl () {
+    return this._insertedBeforeEl;
   }
 
-  get insertedAfterElement () {
-    return this._insertedAfterElement;
+  get insertedAfterEl () {
+    return this._insertedAfterEl;
+
   }
+  /**
+   * current X position and whether to insert after
+   *  */ 
+  getClosestToInsert (container, x, after = false) {
+          const draggableEls = [...container];
+
+          return draggableEls.reduce(
+            (closest, list) => {
+              const box = list.getBoundingClientRect();
+              // depending on whether we are dragging left or right
+              const boxEdge = after ? box.right : box.left;
+              // check that x is behind half of the dragged list
+              const offset = x - (boxEdge + box.width / 2);
+
+              /**
+             offset closer to 0 than any other el and bigger then negative box.width,
+              so we are in the range between the halves of the next two list elements in the given direction
+              in this case we are still inserting  to the closest element's place
+            */
+
+              if (
+                offset < 0 &&
+                offset > -box.width &&
+                offset > closest.offset
+              ) {
+                return { offset: offset, element: list };
+              } else {
+                return closest;
+              }
+            },
+            { after: after, offset: Number.NEGATIVE_INFINITY,  }
+          ).element;
+    };
 }
 
 export { ListPlaceHolder };

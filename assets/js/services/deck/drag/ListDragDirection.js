@@ -4,44 +4,44 @@
 class ListDragDirection {
   constructor (list) {
     this.list = list;
-    this.DIRECTION_RIGHT = 'right';
-    this.DIRECTION_LEFT = 'left';
+    this.DIR_RIGHT = 'right';
+    this.DIR_LEFT = 'left';
   }
 
-  setDragStartCoordinate (coordinate) {
-    if (this.dragStartCoordinate !== undefined) {
-      throw new Error(illegalSetterUseMessage('setDragStartCoordinate'));
+  setStartCoord (coordinate) {
+    if (this.startCoord !== undefined) {
+      throw new Error(illegalSetterUseMessage('setStartCoord'));
     }
 
-    this.dragStartCoordinate = coordinate;
+    this.startCoord = coordinate;
   }
 
-  setCurrentDirection (coordinate) {
-    if (this.dragStartCoordinate === undefined) {
+  setCurDir (coordinate) {
+    if (this.startCoord === undefined) {
       throw new Error(
-        'Drag start coordinate is undefined. Set it before using setCurrentDirection.'
+        'Drag start coordinate is undefined. Set it before using setCurDir.'
       );
     }
 
     this.currentDirection =
-      this.dragStartCoordinate > coordinate ? this.DIRECTION_LEFT : this.DIRECTION_RIGHT;
+      this.startCoord > coordinate ? this.DIR_LEFT : this.DIR_RIGHT;
   }
 
-  getDragStartCoordinate () {
-    return this.dragStartCoordinate;
+  getStartCoord () {
+    return this.startCoord;
   }
 
-  getCurrentDirection () {
+  getCurDir () {
     return this.currentDirection;
   }
 
-  isDragDirectionRight () {
-    return this.getCurrentDirection() === this.DIRECTION_RIGHT;
+  isDirRight () {
+    return this.getCurDir() === this.DIR_RIGHT;
   }
 
-  draggedListDistanceTravelled (currentXPosition) {
-    return Math.abs(this.getDragStartCoordinate() - currentXPosition);
-  } 
+  distTravelled (currentXPosition) {
+    return Math.abs(this.getStartCoord() - currentXPosition);
+  }
 }
 
 export { ListDragDirection };
