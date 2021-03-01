@@ -1,4 +1,4 @@
-export default class DropZone extends HTMLDivElement {
+class DropZone extends HTMLDivElement {
   constructor () {
     super();
     // @TODO find a dynamic way in case a theme change happens
@@ -24,3 +24,5 @@ export default class DropZone extends HTMLDivElement {
     });
   }
 }
+
+export { DropZone as DropZoneElement };

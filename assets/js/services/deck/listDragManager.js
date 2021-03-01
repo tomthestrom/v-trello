@@ -1,7 +1,7 @@
 import { illegalSetterUseMessage } from '../../../../shared/error-messages';
 import { ListDimensions } from './drag/ListDimensions';
 import { ListDragDirection } from './drag/ListDragDirection';
-import { ListPlaceHolder } from './drag/ListPlaceHolder';
+import { ListPlaceHolder } from './drag/DropZoneFactory';
 import { ListMover } from './drag/ListMover';
 
 /**
@@ -34,7 +34,6 @@ const listDragManager = (function () {
       listPlaceHolderService = setListPlaceHolderService(listDimensionsService);
       listDragDirectionService = setListDragDirectionService(list, listDimensionsService);
       moveListService = setMoveListService(list);
-      console.log(moveListService)
     },
 
     getList () {
