@@ -1,4 +1,4 @@
-import { replaceSpaceWithNBSP } from '../../utils/stringHelper';
+import { replaceSpaceWithNBSP } from '../../utils/string';
 import socketConnection from '../../services/websocket';
 
 // import boardService from '../../services/board';

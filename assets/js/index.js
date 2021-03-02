@@ -6,10 +6,9 @@ import TitleTextArea from './components/list/TextArea';
 import AddList from './components/list/AddList';
 import CardList from './components/list/CardList';
 import Deck from './components/list/Deck';
-import DropZone from './components/list/DropZone';
+import { DropZoneElement } from './components/list/DropZone';
 import socketConnection from './services/websocket';
 // @TODO: create a custom element register obj
-
 // // Connection opened
 socketConnection.addEventListener('open', function (event) {
   console.log('open');
@@ -35,4 +34,4 @@ customElements.define('deck-title-textarea', TitleTextArea, { extends: 'textarea
 customElements.define('add-list', AddList);
 customElements.define('card-list', CardList);
 customElements.define('list-deck', Deck, { extends: 'div'});
-customElements.define('list-drop-zone', DropZone, { extends: 'div' });
+customElements.define('list-drop-zone', DropZoneElement, { extends: 'div' });

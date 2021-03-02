@@ -1,6 +1,12 @@
+import DragDirection from "./drag/Direction";
+/**
+ * Dynamically handles Dropzone creation/deletions based on DragDirection
+ */
 class DropZoneManager {
-    constructor (DropZoneFactory) {
-        this._dropZone = new DropZoneFactory();
+    constructor (dropZone, dragDirection, surroundingEls) {
+        this._dropZone = dropZone;
+        this._dragDirection = dragDirection;
+        this._surrEls = [...surroundingEls];
     }
     
     set beforeEl (element) {
@@ -18,46 +24,72 @@ class DropZoneManager {
     get afterEl () {
         return this._afterEl;
     }
-    insertDropZone () {
 
+    get surrEls () {
+      return this._surrEls;
+    }
+    insertDropZone (x, dirRight) {
+      const closestEl = this.getClosestElementInDirection(this.surrEls, x, dirRight);
+      const shouldInsert = this.shouldInsert(closestEl, dirRight);
+
+      if (shouldInsert) {
+            this.insertInDirection(closestEl, dirRight);
+      }
+
+    }
+
+    shouldInsert (closestEl, dirRight) {
+      const elementInDirection = dirRight ? this.beforeEl : this.afterEl;
+
+      return closestEl !== undefined && elementInDirection?.id !== closestEl.id;
+    }
+
+    insertInDirection (closestEl, dirRight) {
+      if (dirRight) {
+        closestEl.before(this._dropZone);
+        this.beforeEl = closestEl;
+      } else {
+        closestEl.before(this._dropZone);
+        this.beforeEl = closestEl;
+      }
     }
 
     deleteDropZone () {
 
     }
     
-    getClosestToInsert (container, x, after = false) {
-          const draggableEls = [...container];
+    getClosestElementInDirection (surroundingElements, x, dirRight = false) {
 
-          return draggableEls.reduce(
-            (closest, list) => {
-              const box = list.getBoundingClientRect();
+          return surroundingElements.reduce(
+            (closest, element) => {
+              const box = element.getBoundingClientRect();
               // depending on whether we are dragging left or right
-              const boxEdge = after ? box.right : box.left;
+              const boxEdge = dirRight ? box.right : box.left;
               // check that x is behind half of the dragged list
               const offset = x - (boxEdge + box.width / 2);
 
-              /**
-                offset of current list element:
+                /**
+                offset of the current list element:
                  IS less than 0
                  IS bigger then negative box.width, so we are in the range between the halves of the next two list elements in the given direction
                 in this case we are still inserting  to the closest element's place even though we might already be dragging through the first half
                 of the next list element (just like the real trello)
-                 IS closer to 0 than any other list element (previously assigned closest.offset)
-            */
+                 IS closer to 0 than any other list element (previously assigned acc.offset)
+                */
 
               if (
                 offset < 0 &&
                 offset > -box.width &&
                 offset > closest.offset
               ) {
-                return { offset: offset, element: list };
+                return { offset: offset, element: element };
               } else {
                 return closest;
               }
             },
-            //after is a boolean, if true, we are looking for an element to insert after, if false, to insert before
-            { after: after, offset: Number.NEGATIVE_INFINITY,  }
+            { dirRight: dirRight, offset: Number.NEGATIVE_INFINITY  }
           ).element;
     };
 }
+
+export { DropZoneManager };

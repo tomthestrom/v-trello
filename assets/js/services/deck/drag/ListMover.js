@@ -1,15 +1,11 @@
 class ListMover {
-    constructor (List) {
-        this._list = List;
+    constructor (list) {
+        this._list = list;
     }
 
-    get list () {
-        return this._list;
-    }
-
-    moveList (newLeftEdge) {
-        this.list.style.position = "absolute";
-        this.list.style.left     =  newLeftEdge + "px";
+    move (newLeftEdge) {
+        this._list.style.position = "absolute";
+        this._list.style.left     =  newLeftEdge + "px";
     }
 }
 export { ListMover }
