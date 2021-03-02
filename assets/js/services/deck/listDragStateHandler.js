@@ -41,8 +41,8 @@ const listDragStateHandler = (function () {
       list = setList(element);
       surroundingElements = setSurroundingElements(this.getList());
 
-      horizontalDragDirService = setDragDirService(horizontalStartCoordinate, "horizontal");
-      verticalDragDirService = setDragDirService(verticalStartCoordinate, "vertical");
+      horizontalDragDirService = setDragDirService(horizontalStartCoordinate, DragDirection.DIR_HORIZONTAL);
+      verticalDragDirService = setDragDirService(verticalStartCoordinate, DragDirection.DIR_VERTICAL); 
 
       dimensionsHelper = setDimensionsHelper(list);
       dropZoneManager = setDropZoneMan(dropZone, surroundingElements);

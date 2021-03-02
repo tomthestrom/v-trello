@@ -3,7 +3,10 @@
  */
 class Direction {
   constructor (startCoord, direction) {
-    this.direction = Direction.DIRECTION_SETTINGS[direction];
+    if (!Direction.DIR_SETTINGS.hasOwnProperty(direction)) {
+      throw new Error("Unknown direction provided.")
+    }
+    this.direction = Direction.DIR_SETTINGS[direction];
 
     this.startCoord = startCoord;
     this.lastCoord  = startCoord;
@@ -11,14 +14,21 @@ class Direction {
     this.DIR_NEGATIVE = this.direction.dirNegative;
   }
 
-  static get DIRECTION_SETTINGS () {
+  static get DIR_VERTICAL () {
+    return "vertical";
+  }
+
+  static get DIR_HORIZONTAL () {
+    return "horizontal";
+  }
+  static get DIR_SETTINGS () {
     return {
-      "vertical": {
+      [Direction.DIR_VERTICAL] : {
         "dirPositive": "down",
         "dirNegative": "up",
       },
 
-      "horizontal": {
+      [Direction.DIR_HORIZONTAL]: {
         "dirPositive": "right",
         "dirNegative": "left",
       }

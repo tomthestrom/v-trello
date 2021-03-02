@@ -57,8 +57,12 @@ export default class CardList extends HTMLElement {
     return this.getBoundingClientRect().left;
   }
 
+  get top () {
+    return this.getBoundingClientRect().top;
+  }
   applyDragStyling () {
     this.style.left = this.left + "px";
+    this.style.top = this.top + "px";
     this.style.position = 'absolute';
     this.style.transform = 'rotate(3deg)';
   }
