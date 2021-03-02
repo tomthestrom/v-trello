@@ -2,42 +2,44 @@
  * Determine drag direction
  */
 class Direction {
-  constructor (startCoord) {
-    this.startCoord = startCoord;
-    this.lastCoord  = startCoord;
+  constructor (startHorCoord) {
+    this.startHorCoord = startHorCoord;
+    this.lastHorCoord  = startHorCoord;
     this.DIR_RIGHT = 'right';
     this.DIR_LEFT = 'left';
+    this.DIR_UP = 'up';
+    this.DIR_DOWN = 'down';
   }
 
-  set startCoord (coordinate) {
-    this._startCoord = coordinate;
+  set startHorCoord (horCoordinate) {
+    this._startHorCoord = horCoordinate;
   }
 
-  set curDir (currentDirection) {
-    this._curDir = currentDirection;
+  set curHorDir (currentHorizontalDirection) {
+    this._curHorDir = currentHorizontalDirection;
   }
 
-  set lastCoord (coordinate) {
-    this._lastCoord = coordinate;
+  set lastHorCoord (horCoordinate) {
+    this._lastHorCoord = horCoordinate;
   }
 
-  get startCoord () {
-    return this._startCoord;
+  get startHorCoord () {
+    return this._startHorCoord;
   }
 
-  get curDir () {
-    return this._curDir;
+  get curHorDir () {
+    return this._curHorDir;
   }
 
-  get lastCoord () {
-    return this._lastCoord;
+  get lastHorCoord () {
+    return this._lastHorCoord;
   }
 
-  setCurDir (coordinate) {
-    if (coordinate !== this.lastCoord) {
-      this.curDir =
-        coordinate > this.lastCoord ?  this.DIR_RIGHT : this.DIR_LEFT;
-        this.lastCoord = coordinate;
+  setCurHorDir (horCoordinate) {
+    if (horCoordinate !== this.lastHorCoord) {
+      this.curHorDir =
+        horCoordinate > this.lastHorCoord ?  this.DIR_RIGHT : this.DIR_LEFT;
+        this.lastHorCoord = horCoordinate;
     }
 
     return this;
@@ -46,15 +48,15 @@ class Direction {
 
 
   isDirRight () {
-    return this.curDir === this.DIR_RIGHT;
+    return this.curHorDir === this.DIR_RIGHT;
   }
 
   isDirRightFromStart () {
-    return this.lastCoord > this.startCoord; 
+    return this.lastHorCoord > this.startHorCoord; 
   }
 
-  distTravelled (currentXPosition) {
-    return Math.abs(this.startCoord - currentXPosition);
+  horDistTravelled (currentXPosition) {
+    return Math.abs(this.startHorCoord - currentXPosition);
   }
 }
 

@@ -57,14 +57,10 @@ const listDragStateHandler = (function () {
       return dimensionsHelper.left + (isDirRightFromStart ? distanceTravelled : distanceTravelled * (-1));
     },
 
-    calculateLeftEdgeForMove (isDirRightFromStart, distanceTravelled) {
-      return this.getList().left + (isDirRightFromStart ? distanceTravelled : distanceTravelled * (-1));
-    },
-
     drag (curXPos) {
-      const isDirectionRight  =  dragDirService.setCurDir(curXPos).isDirRight();
+      const isDirectionRight  =  dragDirService.setCurHorDir(curXPos).isDirRight();
       const isDirRightFromStart  = dragDirService.isDirRightFromStart();
-      const distanceTravelled = dragDirService.distTravelled(curXPos);
+      const distanceTravelled = dragDirService.horDistTravelled(curXPos);
       const leftEdge = this.calculateLeftEdge(isDirRightFromStart, distanceTravelled);
 
       const xPosDropZone = isDirectionRight ? this.calculateRightEdge(isDirRightFromStart ,distanceTravelled) : leftEdge;
