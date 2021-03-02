@@ -65,6 +65,7 @@ export default class CardList extends HTMLElement {
 
   removeDragStyling () {
     this.style.left = 0;
+    this.style.top = 0;
     this.style.position = "relative";
     this.style.transform = 'none';
   }
@@ -83,14 +84,8 @@ export default class CardList extends HTMLElement {
       this.applyDragStyling();
       this.insertDropZoneBeforeThis();
   
-      listDragStateHandler.init(this, e.clientX, this.dropZone);
+      listDragStateHandler.init(this, e.clientX, e.clientY, this.dropZone);
       e.dataTransfer.setDragImage(emptyDragImage, 0, 0);
-      // setEmptyDragImage(e)
-      // const crt = this.cloneNode(true);
-      // crt.style.display = 'none'; /* or visibility: hidden, or any of the above */
-      // // document.body.appendChild(crt);
-      // e.dataTransfer.setDragImage(crt, 0, 0);
-  
   }
 
   dragEnd () {

@@ -2,44 +2,58 @@
  * Determine drag direction
  */
 class Direction {
-  constructor (startHorCoord) {
-    this.startHorCoord = startHorCoord;
-    this.lastHorCoord  = startHorCoord;
-    this.DIR_RIGHT = 'right';
-    this.DIR_LEFT = 'left';
-    this.DIR_UP = 'up';
-    this.DIR_DOWN = 'down';
+  constructor (startCoord, direction) {
+    this.direction = Direction.DIRECTION_SETTINGS[direction];
+
+    this.startCoord = startCoord;
+    this.lastCoord  = startCoord;
+    this.DIR_POSITIVE = this.direction.dirPositive;
+    this.DIR_NEGATIVE = this.direction.dirNegative;
   }
 
-  set startHorCoord (horCoordinate) {
-    this._startHorCoord = horCoordinate;
+  static get DIRECTION_SETTINGS () {
+    return {
+      "vertical": {
+        "dirPositive": "down",
+        "dirNegative": "up",
+      },
+
+      "horizontal": {
+        "dirPositive": "right",
+        "dirNegative": "left",
+      }
+    }
   }
 
-  set curHorDir (currentHorizontalDirection) {
-    this._curHorDir = currentHorizontalDirection;
+  set startCoord (coordinate) {
+    this._startCoord = coordinate;
   }
 
-  set lastHorCoord (horCoordinate) {
-    this._lastHorCoord = horCoordinate;
+  set curDir (currentDirection) {
+    this._curDir = currentDirection;
   }
 
-  get startHorCoord () {
-    return this._startHorCoord;
+  set lastCoord (coordinate) {
+    this._lastCoord = coordinate;
   }
 
-  get curHorDir () {
-    return this._curHorDir;
+  get startCoord () {
+    return this._startCoord;
   }
 
-  get lastHorCoord () {
-    return this._lastHorCoord;
+  get curDir () {
+    return this._curDir;
   }
 
-  setCurHorDir (horCoordinate) {
-    if (horCoordinate !== this.lastHorCoord) {
-      this.curHorDir =
-        horCoordinate > this.lastHorCoord ?  this.DIR_RIGHT : this.DIR_LEFT;
-        this.lastHorCoord = horCoordinate;
+  get lastCoord () {
+    return this._lastCoord;
+  }
+
+  setCurDir (coordinate) {
+    if (coordinate !== this.lastCoord) {
+      this.curDir =
+        coordinate > this.lastCoord ?  this.DIR_POSITIVE : this.DIR_NEGATIVE;
+        this.lastCoord = coordinate;
     }
 
     return this;
@@ -47,16 +61,16 @@ class Direction {
 
 
 
-  isDirRight () {
-    return this.curHorDir === this.DIR_RIGHT;
+  isDirPositive () {
+    return this.curDir === this.DIR_POSITIVE;
   }
 
-  isDirRightFromStart () {
-    return this.lastHorCoord > this.startHorCoord; 
+  isDirPositiveFromStart () {
+    return this.lastCoord > this.startCoord; 
   }
 
-  horDistTravelled (currentXPosition) {
-    return Math.abs(this.startHorCoord - currentXPosition);
+  distTravelled (currentXPosition) {
+    return Math.abs(this.startCoord - currentXPosition);
   }
 }
 

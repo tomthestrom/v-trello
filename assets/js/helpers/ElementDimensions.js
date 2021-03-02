@@ -19,6 +19,10 @@ class ElementDimensions {
   get left () {
     return this.box.left;
   }
+
+  get top () {
+    return this.box.top;
+  }
 }
 
 export { ElementDimensions };

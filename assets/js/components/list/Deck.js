@@ -12,7 +12,7 @@ export default class Deck extends HTMLDivElement {
   connectedCallback() {
     this.addEventListener("dragover", function (e) {
       e.preventDefault();
-      listDragStateHandler.drag(e.clientX);
+      listDragStateHandler.drag(e.clientX, e.clientY);
     });
   }
 }

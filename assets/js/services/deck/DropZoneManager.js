@@ -3,9 +3,8 @@ import DragDirection from "./drag/Direction";
  * Dynamically handles Dropzone creation/deletions based on DragDirection
  */
 class DropZoneManager {
-    constructor (dropZone, dragDirection, surroundingEls) {
+    constructor (dropZone, surroundingEls) {
         this._dropZone = dropZone;
-        this._dragDirection = dragDirection;
         this._surrEls = [...surroundingEls];
     }
 

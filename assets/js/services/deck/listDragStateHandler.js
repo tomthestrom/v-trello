@@ -14,7 +14,8 @@ const listDragStateHandler = (function () {
   let surroundingElements;
   let dimensionsHelper;
   let dropZoneManager;
-  let dragDirService;
+  let horizontalDragDirService;
+  let verticalDragDirService;
   let moveListService;
 
   const setList = (element) => {
@@ -30,18 +31,21 @@ const listDragStateHandler = (function () {
   };
 
   const setDimensionsHelper = (list) => new ElementDimensions(list);
-  const setDragDirService = (startCoordinate) => new DragDirection(startCoordinate);
-  const setDropZoneMan = (DropZoneFactory, ElementDimensions, DragDirection, surroundingElements) => new DropZoneManager(DropZoneFactory, ElementDimensions, DragDirection, surroundingElements);
+  const setDragDirService = (startCoordinate, direction) => new DragDirection(startCoordinate, direction);
+  const setDropZoneMan = (DropZoneFactory, surroundingElements) => new DropZoneManager(DropZoneFactory, surroundingElements);
   const setMoveListService = (list) => new ListMover(list);
 
   return {
 
-    init (element, startCoordinate, dropZone) {
+    init (element, horizontalStartCoordinate, verticalStartCoordinate, dropZone) {
       list = setList(element);
-      dragDirService = setDragDirService(startCoordinate);
       surroundingElements = setSurroundingElements(this.getList());
+
+      horizontalDragDirService = setDragDirService(horizontalStartCoordinate, "horizontal");
+      verticalDragDirService = setDragDirService(verticalStartCoordinate, "vertical");
+
       dimensionsHelper = setDimensionsHelper(list);
-      dropZoneManager = setDropZoneMan(dropZone, dragDirService, surroundingElements)
+      dropZoneManager = setDropZoneMan(dropZone, surroundingElements);
       moveListService = setMoveListService(list);
     },
 
@@ -57,15 +61,24 @@ const listDragStateHandler = (function () {
       return dimensionsHelper.left + (isDirRightFromStart ? distanceTravelled : distanceTravelled * (-1));
     },
 
-    drag (curXPos) {
-      const isDirectionRight  =  dragDirService.setCurHorDir(curXPos).isDirRight();
-      const isDirRightFromStart  = dragDirService.isDirRightFromStart();
-      const distanceTravelled = dragDirService.horDistTravelled(curXPos);
-      const leftEdge = this.calculateLeftEdge(isDirRightFromStart, distanceTravelled);
+    calculateTop (isDirDownFromStart, distanceTravelled) {
+      return dimensionsHelper.top + (isDirDownFromStart ? distanceTravelled : distanceTravelled * (-1));
+    },
 
-      const xPosDropZone = isDirectionRight ? this.calculateRightEdge(isDirRightFromStart ,distanceTravelled) : leftEdge;
+    drag (curXPos, curYPos) {
+      const isDirectionRight  =  horizontalDragDirService.setCurDir(curXPos).isDirPositive();
+      const isDirRightFromStart  = horizontalDragDirService.isDirPositiveFromStart();
+      const horizontalDistanceTravelled = horizontalDragDirService.distTravelled(curXPos);
+      const leftEdge = this.calculateLeftEdge(isDirRightFromStart, horizontalDistanceTravelled);
+
       
-      requestAnimationFrame(() => {moveListService?.move(leftEdge)});
+      verticalDragDirService.setCurDir(curYPos);
+      const isDirDownFromStart  = verticalDragDirService.isDirPositiveFromStart();
+      const verticalDistanceTravelled = verticalDragDirService.distTravelled(curYPos);
+      const top = this.calculateTop(isDirDownFromStart, verticalDistanceTravelled);
+      
+      const xPosDropZone = isDirectionRight ? this.calculateRightEdge(isDirRightFromStart, horizontalDistanceTravelled) : leftEdge;
+      requestAnimationFrame(() => {moveListService?.move(leftEdge, top)});
 
       const throttledInsertDropZone = throttle(() => {
         dropZoneManager.insertDropZone(xPosDropZone, isDirectionRight)
@@ -82,7 +95,7 @@ const listDragStateHandler = (function () {
 
 
     resetState () {
-      [list, dragDirService, surroundingElements, dimensionsHelper, dropZoneManager, moveListService] = [undefined];
+      [list, horizontalDragDirService, surroundingElements, dimensionsHelper, dropZoneManager, moveListService] = [undefined];
     }
 
   };
