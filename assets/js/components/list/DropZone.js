@@ -25,10 +25,12 @@ class DropZone extends HTMLDivElement {
     this.dataset.prev = prev;
   }
 
-  connectedCallback () {
-    this.addEventListener('drop', function (e) {
-      console.log('boha');
-    });
+  get next () {
+    return this.dataset.next;
+  }
+
+  get prev () {
+    return this.dataset.prev;
   }
 }
 

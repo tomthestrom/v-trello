@@ -3,18 +3,15 @@ import { listDragStateHandler } from '../../services/deck/listDragStateHandler';
 export default class CardList extends HTMLElement {
   constructor () {
     super();
+    console.log('constructed')
     this.dragActive = false;
-    this.topLeft = this.getBoundingClientRect().x;
+
   }
 
   set dragActive (isActive) {
-    this.setAttribute('data-drag-active', Boolean(isActive));
+    this.dataset.dragActive = Boolean(isActive);
   }
 
-  set topLeft (x) {
-    this._topLeft = x;
-  }
-  
   set next (next) {
     this.dataset.next = next;
   }
@@ -34,11 +31,6 @@ export default class CardList extends HTMLElement {
   static get dragActiveFalseSelector () {
       return "[data-drag-active=false]"
   }
-
-  get topLeft () {
-    return this._topLeft;
-  }
-
 
   get next () {
     return this.dataset.next;
@@ -64,33 +56,51 @@ export default class CardList extends HTMLElement {
     return this.getBoundingClientRect().left;
   }
 
-  //this is stupid, wtf is topLeft?
-  resetTopLeft () {
-    this._topLeft = this.getBoundingClientRect().x;
+  applyDragStyling () {
+    this.style.left = this.left + "px";
+    this.style.position = 'absolute';
+    this.style.transform = 'rotate(3deg)';
+  }
+
+  removeDragStyling () {
+    this.style.left = 0;
+    this.style.position = "relative";
+    this.style.transform = 'none';
+  }
+
+  createDropZone() {
+   return new DropZoneFactory(this).createDropZone();
+  }
+
+  insertDropZoneBeforeThis () {
+    this.parentNode.insertBefore(this.dropZone, this);
+  }
+
+  dragStart (e) {
+      this.dragActive = true;
+      this.dropZone = this.createDropZone();
+      this.applyDragStyling();
+      this.insertDropZoneBeforeThis();
+  
+      listDragStateHandler.init(this, e.clientX, this.dropZone);
+  
+      // const crt = this.cloneNode(true);
+      // crt.style.display = 'none'; /* or visibility: hidden, or any of the above */
+      // // document.body.appendChild(crt);
+      // e.dataTransfer.setDragImage(crt, 0, 0);
+  
+  }
+
+  dragEnd () {
+      listDragStateHandler.resetState();
+      this.dragActive = false;
+      this.removeDragStyling();
+      this.parentNode.replaceChild(this, this.dropZone);
+      this.dropZone = undefined;
   }
 
   connectedCallback () {
-    this.addEventListener('dragstart', function (e) {
-      this.dragActive = true;
-      this.dropZone = (new DropZoneFactory(this)).createDropZone();
-
-      listDragStateHandler.init(this, e.clientX, this.dropZone);
-      this.style.left = this.left + "px";
-      this.style.position = 'absolute';
-      this.style.transform = 'rotate(3deg)';
-
-      this.parentNode.insertBefore(this.dropZone, this)
-      const crt = this.cloneNode(true);
-      crt.style.display = 'none'; /* or visibility: hidden, or any of the above */
-      // document.body.appendChild(crt);
-      e.dataTransfer.setDragImage(crt, 0, 0);
-
-    });
-
-    this.addEventListener('dragend', function () {
-      listDragStateHandler.resetState();
-      this.style.transform = 'none';
-      this.dragActive = false;
-    });
+    this.addEventListener('dragstart', this.dragStart);
+    this.addEventListener('dragend', this.dragEnd);
   }
 }

@@ -7,6 +7,7 @@ class DropZone {
     this.bluePrint = element;
   }
 
+
   createDropZone () {
     return new DropZoneElement(this.bluePrint.height, this.bluePrint.width);
   }

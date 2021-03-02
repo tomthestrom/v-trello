@@ -3,9 +3,22 @@
  */
 class Direction {
   constructor (startCoord) {
-    this._startCoord = startCoord;
+    this.startCoord = startCoord;
+    this.lastCoord  = startCoord;
     this.DIR_RIGHT = 'right';
     this.DIR_LEFT = 'left';
+  }
+
+  set startCoord (coordinate) {
+    this._startCoord = coordinate;
+  }
+
+  set curDir (currentDirection) {
+    this._curDir = currentDirection;
+  }
+
+  set lastCoord (coordinate) {
+    this._lastCoord = coordinate;
   }
 
   get startCoord () {
@@ -16,9 +29,17 @@ class Direction {
     return this._curDir;
   }
 
+  get lastCoord () {
+    return this._lastCoord;
+  }
+
   setCurDir (coordinate) {
-    this._curDir =
-      this.startCoord > coordinate ? this.DIR_LEFT : this.DIR_RIGHT;
+    if (coordinate !== this.lastCoord) {
+      this.curDir =
+        coordinate > this.lastCoord ?  this.DIR_RIGHT : this.DIR_LEFT;
+        this.lastCoord = coordinate;
+    }
+
     return this;
   }
 
@@ -26,6 +47,10 @@ class Direction {
 
   isDirRight () {
     return this.curDir === this.DIR_RIGHT;
+  }
+
+  isDirRightFromStart () {
+    return this.lastCoord > this.startCoord; 
   }
 
   distTravelled (currentXPosition) {

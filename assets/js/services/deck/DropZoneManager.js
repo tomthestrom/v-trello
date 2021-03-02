@@ -8,23 +8,11 @@ class DropZoneManager {
         this._dragDirection = dragDirection;
         this._surrEls = [...surroundingEls];
     }
-    
-    set beforeEl (element) {
-        this._beforeEl = element;
-    }
-    
-    set afterEl (element) {
-        this._afterEl = element;
-    }
-    
-    get beforeEl () {
-        return this._beforeEl;
-    }
-    
-    get afterEl () {
-        return this._afterEl;
-    }
 
+    get dropZone () {
+      return this._dropZone;
+    }
+    
     get surrEls () {
       return this._surrEls;
     }
@@ -39,17 +27,17 @@ class DropZoneManager {
     }
 
     shouldInsert (closestEl, dirRight) {
-      const elementInDirection = dirRight ? this.beforeEl : this.afterEl;
+      const elementInDirection = dirRight ? this.dropZone.next : this.dropZone.prev;
 
-      return closestEl !== undefined && elementInDirection?.id !== closestEl.id;
+      return closestEl !== undefined && elementInDirection !== closestEl.id;
     }
 
     insertInDirection (closestEl, dirRight) {
       if (dirRight) {
-        closestEl.before(this._dropZone);
-        this.beforeEl = closestEl;
+        closestEl.after(this.dropZone);
+        this.after = closestEl;
       } else {
-        closestEl.before(this._dropZone);
+        closestEl.before(this.dropZone);
         this.beforeEl = closestEl;
       }
     }

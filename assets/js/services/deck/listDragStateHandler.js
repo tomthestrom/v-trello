@@ -31,7 +31,6 @@ const listDragStateHandler = (function () {
 
   const setDimensionsHelper = (list) => new ElementDimensions(list);
   const setDragDirService = (startCoordinate) => new DragDirection(startCoordinate);
-  const setDropZone = (bluePrint) => (new DropZoneFactory(bluePrint)).createDropZone();
   const setDropZoneMan = (DropZoneFactory, ElementDimensions, DragDirection, surroundingElements) => new DropZoneManager(DropZoneFactory, ElementDimensions, DragDirection, surroundingElements);
   const setMoveListService = (list) => new ListMover(list);
 
@@ -50,20 +49,21 @@ const listDragStateHandler = (function () {
       return list;
     },
 
-    calculateRightEdge (distanceTravelled) {
-      return dimensionsHelper.right + distanceTravelled;
+    calculateRightEdge (isDirRightFromStart,distanceTravelled) {
+      return dimensionsHelper.right + (isDirRightFromStart ? distanceTravelled : distanceTravelled * (-1));
     },
 
-    calculateLeftEdge (isDirectionRight, distanceTravelled) {
-      return dimensionsHelper.left + (isDirectionRight ? distanceTravelled : distanceTravelled * (-1));
+    calculateLeftEdge (isDirRightFromStart, distanceTravelled) {
+      return dimensionsHelper.left + (isDirRightFromStart ? distanceTravelled : distanceTravelled * (-1));
     },
 
     drag (curXPos) {
       const isDirectionRight  =  dragDirService.setCurDir(curXPos).isDirRight();
+      const isDirRightFromStart  = dragDirService.isDirRightFromStart();
       const distanceTravelled = dragDirService.distTravelled(curXPos);
-      const leftEdge = this.calculateLeftEdge(isDirectionRight, distanceTravelled);
+      const leftEdge = this.calculateLeftEdge(isDirRightFromStart, distanceTravelled);
 
-      const xPosDropZone = isDirectionRight ? this.calculateRightEdge(distanceTravelled) : leftEdge;
+      const xPosDropZone = isDirectionRight ? this.calculateRightEdge(isDirRightFromStart ,distanceTravelled) : leftEdge;
 
       const throttledInsertDropZone = throttle(() => {
         dropZoneManager.insertDropZone(xPosDropZone, isDirectionRight)
