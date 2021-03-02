@@ -1,5 +1,6 @@
 import { DropZoneFactory } from '../../factories/DropZone';
 import { listDragStateHandler } from '../../services/deck/listDragStateHandler';
+import { emptyDragImage } from '../../utils/drag';
 export default class CardList extends HTMLElement {
   constructor () {
     super();
@@ -83,7 +84,8 @@ export default class CardList extends HTMLElement {
       this.insertDropZoneBeforeThis();
   
       listDragStateHandler.init(this, e.clientX, this.dropZone);
-  
+      e.dataTransfer.setDragImage(emptyDragImage, 0, 0);
+      // setEmptyDragImage(e)
       // const crt = this.cloneNode(true);
       // crt.style.display = 'none'; /* or visibility: hidden, or any of the above */
       // // document.body.appendChild(crt);
@@ -100,6 +102,7 @@ export default class CardList extends HTMLElement {
   }
 
   connectedCallback () {
+    
     this.addEventListener('dragstart', this.dragStart);
     this.addEventListener('dragend', this.dragEnd);
   }

@@ -57,6 +57,10 @@ const listDragStateHandler = (function () {
       return dimensionsHelper.left + (isDirRightFromStart ? distanceTravelled : distanceTravelled * (-1));
     },
 
+    calculateLeftEdgeForMove (isDirRightFromStart, distanceTravelled) {
+      return this.getList().left + (isDirRightFromStart ? distanceTravelled : distanceTravelled * (-1));
+    },
+
     drag (curXPos) {
       const isDirectionRight  =  dragDirService.setCurDir(curXPos).isDirRight();
       const isDirRightFromStart  = dragDirService.isDirRightFromStart();
@@ -64,6 +68,8 @@ const listDragStateHandler = (function () {
       const leftEdge = this.calculateLeftEdge(isDirRightFromStart, distanceTravelled);
 
       const xPosDropZone = isDirectionRight ? this.calculateRightEdge(isDirRightFromStart ,distanceTravelled) : leftEdge;
+      
+      requestAnimationFrame(() => {moveListService?.move(leftEdge)});
 
       const throttledInsertDropZone = throttle(() => {
         dropZoneManager.insertDropZone(xPosDropZone, isDirectionRight)
@@ -75,7 +81,6 @@ const listDragStateHandler = (function () {
       )
 
       throttledInsertDropZone();
-      requestAnimationFrame(() => {moveListService.move(leftEdge)});
     },
 
 
