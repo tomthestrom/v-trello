@@ -2,7 +2,6 @@ import throttle from "lodash/throttle";
 import { illegalSetterUseMessage } from '../../errors/messageFactory';
 import { ElementDimensions } from '../../helpers/ElementDimensions';
 import { DragDirection } from './drag/Direction';
-import { DropZoneFactory } from '../../factories/DropZone';
 import { DropZoneManager } from './DropZoneManager';
 import { ListMover } from './drag/ListMover';
 
@@ -32,7 +31,7 @@ const listDragStateHandler = (function () {
 
   const setDimensionsHelper = (list) => new ElementDimensions(list);
   const setDragDirService = (startCoordinate, direction) => new DragDirection(startCoordinate, direction);
-  const setDropZoneMan = (DropZoneFactory, surroundingElements) => new DropZoneManager(DropZoneFactory, surroundingElements);
+  const setDropZoneMan = (dropzone, surroundingElements, direction) => new DropZoneManager(dropzone, surroundingElements, direction);
   const setMoveListService = (list) => new ListMover(list);
 
   return {
@@ -45,7 +44,7 @@ const listDragStateHandler = (function () {
       verticalDragDirService = setDragDirService(verticalStartCoordinate, DragDirection.DIR_VERTICAL); 
 
       dimensionsHelper = setDimensionsHelper(list);
-      dropZoneManager = setDropZoneMan(dropZone, surroundingElements);
+      dropZoneManager = setDropZoneMan(dropZone, surroundingElements, horizontalDragDirService);
       moveListService = setMoveListService(list);
     },
 
@@ -81,7 +80,7 @@ const listDragStateHandler = (function () {
       requestAnimationFrame(() => {moveListService?.move(leftEdge, top)});
 
       const throttledInsertDropZone = throttle(() => {
-        dropZoneManager.insertDropZone(xPosDropZone, isDirectionRight)
+        dropZoneManager.insertDropZone(xPosDropZone)
       },
       100,
        { 

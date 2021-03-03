@@ -8,7 +8,7 @@ class Direction {
     }
     this.direction = Direction.DIR_SETTINGS[direction];
 
-    this.startCoord = startCoord;
+    this._startCoord = startCoord;
     this.lastCoord  = startCoord;
     this.DIR_POSITIVE = this.direction.dirPositive;
     this.DIR_NEGATIVE = this.direction.dirNegative;
@@ -21,6 +21,7 @@ class Direction {
   static get DIR_HORIZONTAL () {
     return "horizontal";
   }
+
   static get DIR_SETTINGS () {
     return {
       [Direction.DIR_VERTICAL] : {
@@ -33,10 +34,6 @@ class Direction {
         "dirNegative": "left",
       }
     }
-  }
-
-  set startCoord (coordinate) {
-    this._startCoord = coordinate;
   }
 
   set curDir (currentDirection) {

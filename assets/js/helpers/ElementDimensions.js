@@ -4,14 +4,6 @@ class ElementDimensions {
     this.box = list.getBoundingClientRect();
   }
 
-  get height () {
-    return this.box.height;
-  }
-
-  get width () {
-    return this.box.width;
-  }
-
   get right () {
     return this.box.right;
   }

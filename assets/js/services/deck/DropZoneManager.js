@@ -1,11 +1,11 @@
-import DragDirection from "./drag/Direction";
 /**
  * Dynamically handles Dropzone creation/deletions based on DragDirection
  */
 class DropZoneManager {
-    constructor (dropZone, surroundingEls) {
+    constructor (dropZone, surroundingEls, direction) {
         this._dropZone = dropZone;
         this._surrEls = [...surroundingEls];
+        this._direction = direction;
     }
 
     get dropZone () {
@@ -15,24 +15,29 @@ class DropZoneManager {
     get surrEls () {
       return this._surrEls;
     }
-    insertDropZone (x, dirRight) {
-      const closestEl = this.getClosestElementInDirection(this.surrEls, x, dirRight);
-      const shouldInsert = this.shouldInsert(closestEl, dirRight);
+
+    get direction () {
+      return this._direction;
+    }
+
+    insertDropZone (horizontalCoord) {
+      const closestEl     = this.getClosestElementInDirection(this.surrEls, horizontalCoord, this.direction.isDirPositive());
+      const shouldInsert  = this.shouldInsert(closestEl, this.direction.isDirPositive());
 
       if (shouldInsert) {
-            this.insertInDirection(closestEl, dirRight);
+            this.insertInDirection(closestEl, this.direction.isDirPositive());
       }
 
     }
 
-    shouldInsert (closestEl, dirRight) {
-      const elementInDirection = dirRight ? this.dropZone.next : this.dropZone.prev;
+    shouldInsert (closestEl, dirPositive) {
+      const elementInDirection = dirPositive ? this.dropZone.next : this.dropZone.prev;
 
       return closestEl !== undefined && elementInDirection !== closestEl.id;
     }
 
-    insertInDirection (closestEl, dirRight) {
-      if (dirRight) {
+    insertInDirection (closestEl, dirPositive) {
+      if (dirPositive) {
         closestEl.after(this.dropZone);
         this.after = closestEl;
       } else {
@@ -40,18 +45,14 @@ class DropZoneManager {
         this.beforeEl = closestEl;
       }
     }
-
-    deleteDropZone () {
-
-    }
     
-    getClosestElementInDirection (surroundingElements, x, dirRight = false) {
+    getClosestElementInDirection (surroundingElements, x, dirPositive = false) {
 
           return surroundingElements.reduce(
-            (closest, element) => {
+            (acc, element) => {
               const box = element.getBoundingClientRect();
               // depending on whether we are dragging left or right
-              const boxEdge = dirRight ? box.right : box.left;
+              const boxEdge = dirPositive ? box.right : box.left;
               // check that x is behind half of the dragged list
               const offset = x - (boxEdge + box.width / 2);
 
@@ -67,14 +68,14 @@ class DropZoneManager {
               if (
                 offset < 0 &&
                 offset > -box.width &&
-                offset > closest.offset
+                offset > acc.offset
               ) {
                 return { offset: offset, element: element };
               } else {
-                return closest;
+                return acc;
               }
             },
-            { dirRight: dirRight, offset: Number.NEGATIVE_INFINITY  }
+            { dirPositive: dirPositive, offset: Number.NEGATIVE_INFINITY  }
           ).element;
     };
 }

@@ -4,21 +4,11 @@ import { emptyDragImage } from '../../utils/drag';
 export default class CardList extends HTMLElement {
   constructor () {
     super();
-    console.log('constructed')
     this.dragActive = false;
-
   }
 
   set dragActive (isActive) {
     this.dataset.dragActive = Boolean(isActive);
-  }
-
-  set next (next) {
-    this.dataset.next = next;
-  }
-
-  set prev (prev) {
-    this.dataset.prev = prev;
   }
 
   set dropZone (dropZone) {
@@ -29,18 +19,10 @@ export default class CardList extends HTMLElement {
     return this._dropZone;
   }
 
-  static get dragActiveFalseSelector () {
+  static get dragNotActiveSelector () {
       return "[data-drag-active=false]"
   }
 
-  get next () {
-    return this.dataset.next;
-  }
-
-  get prev () {
-    return this.dataset.prev;
-  }
-  
   get height () {
     return this.getBoundingClientRect().height;
   }
@@ -60,6 +42,7 @@ export default class CardList extends HTMLElement {
   get top () {
     return this.getBoundingClientRect().top;
   }
+
   applyDragStyling () {
     this.style.left = this.left + "px";
     this.style.top = this.top + "px";
@@ -100,8 +83,12 @@ export default class CardList extends HTMLElement {
       this.dropZone = undefined;
   }
 
+  move (left, top) {
+    this.style.left     =  numberWithPx(newLeftEdge);
+    this.style.top     =  numberWithPx(top);
+  }
+
   connectedCallback () {
-    
     this.addEventListener('dragstart', this.dragStart);
     this.addEventListener('dragend', this.dragEnd);
   }
