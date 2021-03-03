@@ -1,4 +1,4 @@
-import { DropZoneElement }  from '../components/list/DropZone';
+import { DropZoneElement }  from '../components/deck/DropZone';
 /**
  * creates a dropzone element, ElementDimensions is provided as a blueprint
  */

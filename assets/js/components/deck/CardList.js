@@ -2,7 +2,8 @@ import { DropZoneFactory } from '../../factories/DropZone';
 import { listDragStateHandler } from '../../services/deck/listDragStateHandler';
 import { emptyDragImage } from '../../utils/drag';
 import { numberWithPx } from "../../utils/string";
-export default class CardList extends HTMLElement {
+
+class CardList extends HTMLElement {
   constructor () {
     super();
     this.dragActive = false;
@@ -48,14 +49,16 @@ export default class CardList extends HTMLElement {
     this.style.left = this.left + "px";
     this.style.top = this.top + "px";
     this.style.position = 'absolute';
+    this.style.zIndex = "1000";
     this.style.transform = 'rotate(3deg)';
   }
 
   removeDragStyling () {
-    this.style.left = 0;
-    this.style.top = 0;
-    this.style.position = "relative";
-    this.style.transform = 'none';
+    this.style.left = '';
+    this.style.top = '';
+    this.style.position = '';
+    this.style.zIndex = '';
+    this.style.transform = '';
   }
 
   createDropZone() {
@@ -94,3 +97,5 @@ export default class CardList extends HTMLElement {
     this.addEventListener('dragend', this.dragEnd);
   }
 }
+
+export { CardList as CardListElement }

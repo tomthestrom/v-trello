@@ -1,9 +1,9 @@
 import throttle from "lodash/throttle";
-import CardList from "../../components/list/CardList";
+import  { CardListElement } from "../../components/deck/CardList";
 import { illegalSetterUseMessage } from '../../errors/messageFactory';
-import { ElementDimensions } from '../../helpers/ElementDimensions';
+import { ElementDimensionsRecord } from '../../helpers/ElementDimensionsRecord';
 import { DragDirection } from './drag/Direction';
-import { DropZoneManager } from './DropZoneManager';
+import { DropZoneManager } from '../DropZoneManager';
 
 /**
  * takes care of the state of direction when dragging
@@ -11,10 +11,10 @@ import { DropZoneManager } from './DropZoneManager';
 const listDragStateHandler = (function () {
   let list;
   let surroundingElements;
-  let dimensionsHelper;
-  let dropZoneManager;
   let horizontalDragDirService;
   let verticalDragDirService;
+  let startDimensions;
+  let dropZoneManager;
 
   const setList = (element) => {
     if (list !== undefined) {
@@ -24,25 +24,17 @@ const listDragStateHandler = (function () {
     return element;
   };
 
-  const setSurroundingElements = (list) => {
-    return list.parentNode.querySelectorAll(CardList.dragNotActiveSelector);
-  };
-
-  const setDimensionsHelper = (list) => new ElementDimensions(list);
-  const setDragDirService = (startCoordinate, direction) => new DragDirection(startCoordinate, direction);
-  const setDropZoneMan = (dropzone, surroundingElements, direction) => new DropZoneManager(dropzone, surroundingElements, direction);
-
   return {
 
     init (element, horizontalStartCoordinate, verticalStartCoordinate, dropZone) {
       list = setList(element);
-      surroundingElements = setSurroundingElements(this.getList());
+      surroundingElements = list.parentNode.querySelectorAll(CardListElement.dragNotActiveSelector);
 
-      horizontalDragDirService = setDragDirService(horizontalStartCoordinate, DragDirection.DIR_HORIZONTAL);
-      verticalDragDirService = setDragDirService(verticalStartCoordinate, DragDirection.DIR_VERTICAL); 
+      horizontalDragDirService = new DragDirection(horizontalStartCoordinate, DragDirection.DIR_HORIZONTAL);
+      verticalDragDirService = new DragDirection(verticalStartCoordinate, DragDirection.DIR_VERTICAL); 
 
-      dimensionsHelper = setDimensionsHelper(list);
-      dropZoneManager = setDropZoneMan(dropZone, surroundingElements, horizontalDragDirService);
+      startDimensions = new ElementDimensionsRecord(list);
+      dropZoneManager = new DropZoneManager(dropZone, surroundingElements, horizontalDragDirService);
     },
 
     getList () {
@@ -51,17 +43,17 @@ const listDragStateHandler = (function () {
 
     calculateRightEdge () {
       const distanceTravelled = horizontalDragDirService.distTravelled();
-      return dimensionsHelper.right + (horizontalDragDirService.isDirPositiveFromStart() ? distanceTravelled : distanceTravelled * (-1));
+      return startDimensions.right + (horizontalDragDirService.isDirPositiveFromStart() ? distanceTravelled : distanceTravelled * (-1));
     },
 
     calculateLeftEdge () {
       const distanceTravelled = horizontalDragDirService.distTravelled();
-      return dimensionsHelper.left + (horizontalDragDirService.isDirPositiveFromStart() ? distanceTravelled : distanceTravelled * (-1));
+      return startDimensions.left + (horizontalDragDirService.isDirPositiveFromStart() ? distanceTravelled : distanceTravelled * (-1));
     },
 
     calculateTop () {
       const distanceTravelled = verticalDragDirService.distTravelled();
-      return dimensionsHelper.top + (verticalDragDirService.isDirPositiveFromStart() ? distanceTravelled : distanceTravelled * (-1));
+      return startDimensions.top + (verticalDragDirService.isDirPositiveFromStart() ? distanceTravelled : distanceTravelled * (-1));
     },
 
     drag (curXPos, curYPos) {
@@ -87,12 +79,9 @@ const listDragStateHandler = (function () {
       throttledInsertDropZone();
     },
 
-
-
     resetState () {
-      [list, horizontalDragDirService, surroundingElements, dimensionsHelper, dropZoneManager] = [undefined];
+      [list, surroundingElements, horizontalDragDirService, verticalDragDirService, startDimensions, dropZoneManager] = [undefined];
     }
-
   };
 })();
 
