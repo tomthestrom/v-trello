@@ -1,6 +1,7 @@
 import { DropZoneFactory } from '../../factories/DropZone';
 import { listDragStateHandler } from '../../services/deck/listDragStateHandler';
 import { emptyDragImage } from '../../utils/drag';
+import { numberWithPx } from "../../utils/string";
 export default class CardList extends HTMLElement {
   constructor () {
     super();
@@ -84,7 +85,7 @@ export default class CardList extends HTMLElement {
   }
 
   move (left, top) {
-    this.style.left     =  numberWithPx(newLeftEdge);
+    this.style.left     =  numberWithPx(left);
     this.style.top     =  numberWithPx(top);
   }
 

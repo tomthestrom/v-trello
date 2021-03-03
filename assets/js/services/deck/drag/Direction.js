@@ -76,8 +76,8 @@ class Direction {
     return this.lastCoord > this.startCoord; 
   }
 
-  distTravelled (currentXPosition) {
-    return Math.abs(this.startCoord - currentXPosition);
+  distTravelled () {
+    return Math.abs(this.startCoord - this.lastCoord);
   }
 }
 
