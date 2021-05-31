@@ -1,35 +1,40 @@
-import { numberWithPx }from "../../utils/string";
-
+import { numberWithPx } from "../utils/string";
+/**
+ * Used for the placeholder when dragging
+ */
 class DropZone extends HTMLDivElement {
-  constructor (height, minWidth) {
+  constructor(height, minWidth, bgColor) {
     super();
-    // @TODO find a dynamic way in case a theme change happens or is used as a dropzone for another el. 
-    this.style.backgroundColor = '#026aa7';
     this.height = height;
     this.minWidth = minWidth;
+    this.bgColor = bgColor;
   }
 
-  set height (height) {
+  set height(height) {
     this.style.height = numberWithPx(height);
   }
 
-  set minWidth (width) {
+  set minWidth(width) {
     this.style.minWidth = numberWithPx(width);
   }
 
-  set next (next) {
+  set bgColor(bgColor) {
+    this.style.backgroundColor = bgColor;
+  }
+
+  set next(next) {
     this.dataset.next = next;
   }
 
-  set prev (prev) {
+  set prev(prev) {
     this.dataset.prev = prev;
   }
 
-  get next () {
+  get next() {
     return this.dataset.next;
   }
 
-  get prev () {
+  get prev() {
     return this.dataset.prev;
   }
 }
