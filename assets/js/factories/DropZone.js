@@ -1,4 +1,4 @@
-import { DropZoneElement } from "../components/DropZone";
+import { DropZoneElement } from "../components/deck/DropZone";
 /**
  * creates a dropzone element (placeholder), for the dragged element that is provided as a blueprint
  */

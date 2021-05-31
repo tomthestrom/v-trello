@@ -1,4 +1,4 @@
-import { listDrag } from "../services/listDrag";
+import { listDrag } from "../../services/deck/listDrag";
 /**
  * Contains the lists and the add list button
  */

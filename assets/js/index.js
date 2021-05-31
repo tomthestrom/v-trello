@@ -1,11 +1,10 @@
 import '../scss/main.scss';
-import { boardService } from './services/board';
 import Title from './components/board/Title';
 import TitleInput from './components/board/Input';
 import TitleTextArea from './components/deck/TextArea';
 import AddList from './components/deck/AddList';
 import { CardListElement } from './components/deck/CardList';
-import Deck from './components/deck/Deck';
+import { ListDeckElement } from './components/deck/List';
 import { DropZoneElement } from './components/deck/DropZone';
 import socketConnection from './services/websocket';
 // @TODO: create a custom element register obj
@@ -33,5 +32,5 @@ customElements.define('board-title-input', TitleInput, { extends: 'input' });
 customElements.define('deck-title-textarea', TitleTextArea, { extends: 'textarea' });
 customElements.define('add-list', AddList);
 customElements.define('card-list', CardListElement);
-customElements.define('list-deck', Deck, { extends: 'div'});
+customElements.define('list-deck', ListDeckElement, { extends: 'div'});
 customElements.define('drop-zone', DropZoneElement, { extends: 'div' });

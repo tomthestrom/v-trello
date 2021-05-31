@@ -1,4 +1,4 @@
-import { numberWithPx } from "../utils/string";
+import { numberWithPx } from "../../utils/string";
 /**
  * Used for the placeholder when dragging
  */

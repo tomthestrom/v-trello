@@ -1,7 +1,7 @@
 /**
  * Dynamically handles Dropzone insertion based on DragDirection
  */
- class DropZoneManager {
+class DropZoneManager {
   constructor(dropZone, direction, surroundingEls) {
     this._dropZone = dropZone;
     this._direction = direction;
