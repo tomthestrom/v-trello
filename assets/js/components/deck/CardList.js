@@ -74,8 +74,9 @@ class CardList extends HTMLElement {
       this.dropZone = this.createDropZone();
       this.applyDragStyling();
       this.insertDropZoneBeforeThis();
-  
-      listDragStateHandler.init(this, e.clientX, e.clientY, this.dropZone);
+      console.log(e.clientX)
+      console.log(e.pageX)
+      listDragStateHandler.init(this, e.pageX, e.pageY, this.dropZone);
       e.dataTransfer.setDragImage(emptyDragImage, 0, 0);
   }
 

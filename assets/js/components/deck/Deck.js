@@ -7,7 +7,7 @@ export default class Deck extends HTMLDivElement {
 
   dragOver (e) {
     e.preventDefault();
-    listDragStateHandler.drag(e.clientX, e.clientY);
+    listDragStateHandler.drag(e.pageX, e.pageY);
   }
  
   connectedCallback() {

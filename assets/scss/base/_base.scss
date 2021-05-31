@@ -27,6 +27,9 @@
 
 html {
     font-size: 62.5%; // this makes 1 REM equal 10px, assuming user is using normal preset UA 16px
+    min-width: max-content;
+    min-height: 100%;
+    overflow-y: hidden;
 }
 
 body {
