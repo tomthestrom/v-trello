@@ -7,16 +7,16 @@ class ElementDimensionsRecord {
     this.box = element.getBoundingClientRect();
   }
 
-  get right () {
-    return this.box.right;
+  get right() {
+    return this.box.right + window.scrollX;
   }
 
-  get left () {
-    return this.box.left;
+  get left() {
+    return this.box.left + window.scrollX;
   }
 
-  get top () {
-    return this.box.top;
+  get top() {
+    return this.box.top + window.scrollY;
   }
 }
 
