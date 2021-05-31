@@ -1,82 +1,80 @@
 /**
- * Determine drag direction
+ * Drag direction helper
  */
-class Direction {
-  constructor (startCoord, direction) {
+ class Direction {
+  constructor(startCoord, direction) {
     if (!Direction.DIR_SETTINGS.hasOwnProperty(direction)) {
-      throw new Error("Unknown direction provided.")
+      throw new Error("Unknown direction provided.");
     }
     this.direction = Direction.DIR_SETTINGS[direction];
 
     this._startCoord = startCoord;
-    this.lastCoord  = startCoord;
+    this.lastCoord = startCoord;
     this.DIR_POSITIVE = this.direction.dirPositive;
     this.DIR_NEGATIVE = this.direction.dirNegative;
   }
 
-  static get DIR_VERTICAL () {
+  static get DIR_VERTICAL() {
     return "vertical";
   }
 
-  static get DIR_HORIZONTAL () {
+  static get DIR_HORIZONTAL() {
     return "horizontal";
   }
 
-  static get DIR_SETTINGS () {
+  static get DIR_SETTINGS() {
     return {
-      [Direction.DIR_VERTICAL] : {
-        "dirPositive": "down",
-        "dirNegative": "up",
+      [Direction.DIR_VERTICAL]: {
+        dirPositive: "down",
+        dirNegative: "up",
       },
 
       [Direction.DIR_HORIZONTAL]: {
-        "dirPositive": "right",
-        "dirNegative": "left",
-      }
-    }
+        dirPositive: "right",
+        dirNegative: "left",
+      },
+    };
   }
 
-  set curDir (currentDirection) {
+  set curDir(currentDirection) {
     this._curDir = currentDirection;
   }
 
-  set lastCoord (coordinate) {
+  set lastCoord(coordinate) {
     this._lastCoord = coordinate;
   }
 
-  get startCoord () {
+  get startCoord() {
     return this._startCoord;
   }
 
-  get curDir () {
+  get curDir() {
     return this._curDir;
   }
 
-  get lastCoord () {
+  get lastCoord() {
     return this._lastCoord;
   }
 
-  setCurDir (coordinate) {
+  setCurDir(coordinate) {
     if (coordinate !== this.lastCoord) {
       this.curDir =
-        coordinate > this.lastCoord ?  this.DIR_POSITIVE : this.DIR_NEGATIVE;
-        this.lastCoord = coordinate;
+        coordinate > this.lastCoord ? this.DIR_POSITIVE : this.DIR_NEGATIVE;
+      this.lastCoord = coordinate;
     }
 
     return this;
   }
 
-
-
-  isDirPositive () {
+  isDirPositive() {
     return this.curDir === this.DIR_POSITIVE;
   }
 
-  isDirPositiveFromStart () {
-    return this.lastCoord > this.startCoord; 
+  isDirPositiveFromStart() {
+    return this.lastCoord > this.startCoord;
   }
 
-  distTravelled () {
+  distTravelled() {
     return Math.abs(this.startCoord - this.lastCoord);
   }
 }
