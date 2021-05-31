@@ -1,16 +1,20 @@
-import { listDragStateHandler } from "../../services/deck/listDragStateHandler";
-
-export default class Deck extends HTMLDivElement {
+import { listDrag } from "../services/listDrag";
+/**
+ * Contains the lists and the add list button
+ */
+class ListDeck extends HTMLDivElement {
   constructor() {
     super();
   }
 
-  dragOver (e) {
+  dragOver(e) {
     e.preventDefault();
-    listDragStateHandler.drag(e.pageX, e.pageY);
+    listDrag.dragOverDeck(this, e.pageX, e.pageY);
   }
- 
+
   connectedCallback() {
     this.addEventListener("dragover", this.dragOver);
   }
 }
+
+export { ListDeck as ListDeckElement };
