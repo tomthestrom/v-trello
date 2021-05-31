@@ -23,6 +23,19 @@ const listDrag = (function () {
     return element;
   };
 
+  const calculateEdge = (side = "left") => {
+    const edge = side === "left" ? startDimensions.left : startDimensions.right; 
+    const distanceTravelled = horizontalDragDir.isDirPositiveFromStart() ?  horizontalDragDir.distTravelled() : horizontalDragDir.distTravelled() * -1 ;
+
+    return edge + distanceTravelled;
+  }
+
+  const calculateTop = () => {
+      const distanceTravelled = verticalDragDir.isDirPositiveFromStart() ?  verticalDragDir.distTravelled() : verticalDragDir.distTravelled() * -1;
+
+      return startDimensions.top + distanceTravelled;
+  } 
+
   return {
     init(
       element,
@@ -56,44 +69,14 @@ const listDrag = (function () {
       return list;
     },
 
-    calculateRightEdge() {
-      const distanceTravelled = horizontalDragDir.distTravelled();
-      return (
-        startDimensions.right +
-        (horizontalDragDir.isDirPositiveFromStart()
-          ? distanceTravelled
-          : distanceTravelled * -1)
-      );
-    },
-
-    calculateLeftEdge() {
-      const distanceTravelled = horizontalDragDir.distTravelled();
-      return (
-        startDimensions.left +
-        (horizontalDragDir.isDirPositiveFromStart()
-          ? distanceTravelled
-          : distanceTravelled * -1)
-      );
-    },
-
-    calculateTop() {
-      const distanceTravelled = verticalDragDir.distTravelled();
-      return (
-        startDimensions.top +
-        (verticalDragDir.isDirPositiveFromStart()
-          ? distanceTravelled
-          : distanceTravelled * -1)
-      );
-    },
-
     dragOverDeck(deck, curXPos, curYPos) {
       horizontalDragDir.setCurDir(curXPos);
       verticalDragDir.setCurDir(curYPos);
 
       const list = this.getList();
-      const leftEdge = this.calculateLeftEdge();
-      const top = this.calculateTop();
-      const rightEdge = this.calculateRightEdge();
+      const leftEdge = calculateEdge(); 
+      const rightEdge = calculateEdge("right");
+      const top = calculateTop();
       const scrollDeckBy = rightEdge - this.getList().width;
 
       const xPosDropZone = horizontalDragDir.isDirPositive()
