@@ -7,6 +7,7 @@ import { CardListElement } from './components/deck/CardList';
 import { ListDeckElement } from './components/deck/List';
 import { DropZoneElement } from './components/deck/DropZone';
 import socketConnection from './services/websocket';
+import { SingleCardElement } from './components/deck/SingleCard';
 // @TODO: create a custom element register obj
 // // Connection opened
 socketConnection.addEventListener('open', function (event) {
@@ -34,3 +35,4 @@ customElements.define('add-list', AddList);
 customElements.define('card-list', CardListElement);
 customElements.define('list-deck', ListDeckElement, { extends: 'div'});
 customElements.define('drop-zone', DropZoneElement, { extends: 'div' });
+customElements.define('single-card', SingleCardElement, {extends: 'li'});
