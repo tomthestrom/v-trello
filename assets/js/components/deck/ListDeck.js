@@ -9,7 +9,9 @@ class ListDeck extends HTMLDivElement {
 
   dragOver(e) {
     e.preventDefault();
-    listDrag.dragOverDeck(this, e.pageX, e.pageY);
+    if (listDrag.getList()) {
+      listDrag.dragOverDeck(this, e.pageX, e.pageY);
+    }
   }
 
   connectedCallback() {

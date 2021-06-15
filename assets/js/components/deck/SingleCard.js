@@ -1,3 +1,8 @@
+import { DropZoneFactory } from "../../factories/DropZone";
+import { cardDrag } from "../../services/deck/cardDrag";
+import { emptyDragImage } from "../../utils/drag";
+import { numberWithPx } from "../../utils/string";
+
 class SingleCard extends HTMLLIElement {
   constructor() {
     super();
@@ -20,6 +25,83 @@ class SingleCard extends HTMLLIElement {
     return getComputedStyle(document.documentElement).getPropertyValue(
       "--color-card-dropzone"
     );
+  }
+
+  get height() {
+    return this.getBoundingClientRect().height;
+  }
+
+  get width() {
+    return this.getBoundingClientRect().width;
+  }
+
+  get right() {
+    return this.getBoundingClientRect().right;
+  }
+
+  get left() {
+    return this.getBoundingClientRect().left;
+  }
+
+  get top() {
+    return this.getBoundingClientRect().top;
+  }
+
+  
+  applyDragStyling() {
+    this.style.left = numberWithPx(this.left);
+    this.style.top = numberWithPx(this.top);
+    this.style.position = "fixed";
+    this.style.zIndex = "1000";
+    this.style.transform = "rotate(3deg)";
+  }
+
+  removeDragStyling() {
+    this.style.left = "";
+    this.style.top = "";
+    this.style.position = "";
+    this.style.zIndex = "";
+    this.style.transform = "";
+  }
+
+  createDropZone() {
+    return new DropZoneFactory(this).createDropZone();
+  }
+
+  insertDropZoneBeforeThis() {
+    this.parentNode.insertBefore(this.dropZone, this);
+  }
+
+  dragStart(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.dragActive = true;
+    this.dropZone = this.createDropZone();
+    this.applyDragStyling();
+    this.insertDropZoneBeforeThis();
+    cardDrag.init(this, e.pageX, e.pageY, this.dropZone);
+    e.dataTransfer.setDragImage(emptyDragImage, 0, 0);
+  }
+
+  dragEnd() {
+    cardDrag.resetState();
+    this.dragActive = false;
+    this.removeDragStyling();
+    this.parentNode.replaceChild(this, this.dropZone);
+    this.dropZone = undefined;
+  }
+
+  move(left, top) {
+    return function moveList() {
+      this.style.left = numberWithPx(left);
+      this.style.top = numberWithPx(top);
+      requestAnimationFrame(() => moveList);
+    }.bind(this);
+  }
+
+  connectedCallback() {
+    this.addEventListener("dragstart", this.dragStart);
+    this.addEventListener("dragend", this.dragEnd);
   }
 }
 

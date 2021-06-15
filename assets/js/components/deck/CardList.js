@@ -34,6 +34,9 @@ class CardList extends HTMLElement {
     );
   }
 
+
+  //@TODO: put in one place shared stuff with SingleCard
+
   get height() {
     return this.getBoundingClientRect().height;
   }
@@ -52,6 +55,11 @@ class CardList extends HTMLElement {
 
   get top() {
     return this.getBoundingClientRect().top;
+  }
+
+  isDragged(dragEvent) {
+    return typeof dragEvent.explicitOriginalTarget.getAttribute === "function" &&
+     dragEvent.explicitOriginalTarget.getAttribute("is") === this.getAttribute("is"); 
   }
 
   applyDragStyling() {
@@ -79,12 +87,16 @@ class CardList extends HTMLElement {
   }
 
   dragStart(e) {
-    this.dragActive = true;
-    this.dropZone = this.createDropZone();
-    this.applyDragStyling();
-    this.insertDropZoneBeforeThis();
-    listDrag.init(this, e.pageX, e.pageY, this.dropZone);
-    e.dataTransfer.setDragImage(emptyDragImage, 0, 0);
+    if (this.isDragged(e)) {
+      this.dragActive = true;
+      this.dropZone = this.createDropZone();
+      this.applyDragStyling();
+      this.insertDropZoneBeforeThis();
+      listDrag.init(this, e.pageX, e.pageY, this.dropZone);
+      e.dataTransfer.setDragImage(emptyDragImage, 0, 0);
+    } else {
+      e.preventDefault();
+    }
   }
 
   dragEnd() {
