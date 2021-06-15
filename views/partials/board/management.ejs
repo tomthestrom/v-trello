@@ -1,45 +1,37 @@
 <div class="board__management">
-    <%- include('./heading.ejs') %>
-    <button class="btn btn--bman btn--favorite mg-right-20 position-relative">
-        <svg class="board__icon">
-            <use xlink:href="./icons/sprite.svg#star"></use>
-        </svg>
-    </button>
+  <%- include('./heading.ejs') %>
+  <button class="btn btn--bman btn--favorite mg-right-20 position-relative">
+    <svg class="board__icon">
+      <use xlink:href="./icons/sprite.svg#star"></use>
+    </svg>
+  </button>
 
-    <div class="board__ownership mg-right-20 position-relative">
-        <button class="btn btn--bman">Personal</button>
-    </div>
+  <div class="board__ownership mg-right-20 position-relative">
+    <button class="btn btn--bman">Personal</button>
+  </div>
 
-    <div class="board__visibility mg-right-20 position-relative">
-        <button class="btn btn--bman">
-            <svg class="board__icon">
-                <use xlink:href="./icons/sprite.svg#lock"></use>
-            </svg>
-            <span>
-                Private
-            </span>
-        </button>
-    </div>
+  <div class="board__visibility mg-right-20 position-relative">
+    <button class="btn btn--bman">
+      <svg class="board__icon">
+        <use xlink:href="./icons/sprite.svg#lock"></use>
+      </svg>
+      <span> Private </span>
+    </button>
+  </div>
 
-    <button class="btn btn--bman mg-right-auto">
-        Invite
+  <button class="btn btn--bman mg-right-auto">Invite</button>
+  <button class="btn btn--bman mg-right-5">
+    <svg class="board__icon">
+      <use xlink:href="./icons/sprite.svg#butler"></use>
+    </svg>
+    <span> Butler </span>
+  </button>
+  <div class="board__menu">
+    <button class="btn btn--bman">
+      <svg class="board__icon">
+        <use xlink:href="./icons/sprite.svg#more"></use>
+      </svg>
+      <span> Show Menu </span>
     </button>
-    <button class="btn btn--bman mg-right-5">
-        <svg class="board__icon">
-            <use xlink:href="./icons/sprite.svg#butler"></use>
-        </svg>
-        <span>
-            Butler
-        </span>
-    </button>
-    <div class="board__menu">
-        <button class="btn btn--bman">
-            <svg class="board__icon">
-                <use xlink:href="./icons/sprite.svg#more"></use>
-            </svg>
-            <span>
-                Show Menu
-            </span>
-        </button>
-    </div>
+  </div>
 </div>

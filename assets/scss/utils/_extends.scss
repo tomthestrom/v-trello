@@ -1,10 +1,10 @@
 %board__pseudo-border {
-    &:after {
-        content: "";
-        border-left: 1px solid var(--color-board-management-background);
-        height: 1.8rem;
-        top: 0.7rem;
-        right: -1rem;
-        position: absolute;
-    }
+  &:after {
+    content: "";
+    border-left: 1px solid var(--color-board-management-background);
+    height: 1.8rem;
+    top: 0.7rem;
+    right: -1rem;
+    position: absolute;
+  }
 }

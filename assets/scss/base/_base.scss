@@ -1,39 +1,38 @@
 *,
 *::after,
 *::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
 :root {
-    --color-board-management-background: hsla(0,0%,100%,.275);
+  --color-board-management-background: hsla(0, 0%, 100%, 0.275);
 
-    --color-list-background:#ebecf0;
-    --color-list--add-list: #5aac44;
-    --color-list--add-list--hover: #61bd4f;
-    --color-list--add-list--active: #49852e;
-    --color-list-card-background: #fff;
-    --color-list-card-background--hover:#f4f5f7;
-    --color-list-card-add-card: #55657b;
-    --color-list-card-add-card--hover: rgba(9,30,66,.08);
+  --color-list-background: #ebecf0;
+  --color-list--add-list: #5aac44;
+  --color-list--add-list--hover: #61bd4f;
+  --color-list--add-list--active: #49852e;
+  --color-list-card-background: #fff;
+  --color-list-card-background--hover: #f4f5f7;
+  --color-card-dropzone: rgba(9, 30, 66, 0.04);
+  --color-list-card-add-card: #55657b;
+  --color-list-card-add-card--hover: rgba(9, 30, 66, 0.08);
 
-    --color-deck-list-header-background--focus: #fff;
-    --color-primary-blue: #0079bf;;
-    --color-primary-blue--dark:#026aa7;
-
-
+  --color-deck-list-header-background--focus: #fff;
+  --color-primary-blue: #0079bf;
+  --color-primary-blue--dark: #026aa7;
 }
 
 html {
-    font-size: 62.5%; // this makes 1 REM equal 10px, assuming user is using normal preset UA 16px
-    min-width: max-content;
-    min-height: 100%;
-    overflow-y: hidden;
+  font-size: 62.5%; // this makes 1 REM equal 10px, assuming user is using normal preset UA 16px
+  min-width: max-content;
+  min-height: 100%;
+  overflow-y: hidden;
 }
 
 body {
-    font-size: 1.6rem;
-    background-color: var(--color-primary-blue);
-    box-sizing: border-box;
+  font-size: 1.6rem;
+  background-color: var(--color-primary-blue);
+  box-sizing: border-box;
 }

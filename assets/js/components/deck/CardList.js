@@ -1,12 +1,12 @@
-import { DropZoneFactory } from '../../factories/DropZone';
-import { listDrag } from '../../services/deck/listDrag';
-import { emptyDragImage } from '../../utils/drag';
+import { DropZoneFactory } from "../../factories/DropZone";
+import { listDrag } from "../../services/deck/listDrag";
+import { emptyDragImage } from "../../utils/drag";
 import { numberWithPx } from "../../utils/string";
 
 /**
  * The list element
  */
- class CardList extends HTMLElement {
+class CardList extends HTMLElement {
   constructor() {
     super();
     this.dragActive = false;

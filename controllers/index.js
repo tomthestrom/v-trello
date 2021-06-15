@@ -1,65 +1,68 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var debug = require('debug')('v-trello');
-const BoardModel = require('../models/board.model');
-const List = require('../models/list.model');
-const wsServer = require('../services/ws-server');
+var debug = require("debug")("v-trello");
+const BoardModel = require("../models/board.model");
+const List = require("../models/list.model");
+const wsServer = require("../services/ws-server");
 //gonna get swapped if the project grows to having more than one board :D
 const getBoardRecord = () => BoardModel.findOne();
 
-const updateBoardTitleRecord = (boardId, newTitle) => BoardModel.findOneAndUpdate( {_id: boardId}, {title: newTitle}, {new: true});
+const updateBoardTitleRecord = (boardId, newTitle) =>
+  BoardModel.findOneAndUpdate(
+    { _id: boardId },
+    { title: newTitle },
+    { new: true }
+  );
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get("/", function (req, res, next) {
   const Board = getBoardRecord();
 
   Board.then((board) => {
-    debug(board)
-    res.render('index', {
+    debug(board);
+    res.render("index", {
       id: board._id,
-      title: board.title
-    
+      title: board.title,
     });
-  }).catch(error => {
+  }).catch((error) => {
     debug(error);
-  })
+  });
 });
 //daky autoloader podla typu messagu abo co
-wsServer.on('connection', socket => {
-  socket.on('message', function (message) {
-      const parsedMessage = JSON.parse(message);
-      if (parsedMessage.type === "boardTitle") {
-        //after change emit through ws to component
-        updateBoardTitleRecord(parsedMessage.id, parsedMessage.value).
-        then(
-          queryResult => {
-            const updateObject = {
-              id: "6022b00811c58d5b8d2c6943",
-              type: "boardTitle",
-              value: queryResult.title
-            };
+wsServer.on("connection", (socket) => {
+  socket.on("message", function (message) {
+    const parsedMessage = JSON.parse(message);
+    if (parsedMessage.type === "boardTitle") {
+      //after change emit through ws to component
+      updateBoardTitleRecord(parsedMessage.id, parsedMessage.value).then(
+        (queryResult) => {
+          const updateObject = {
+            id: "6022b00811c58d5b8d2c6943",
+            type: "boardTitle",
+            value: queryResult.title,
+          };
 
-            const updateObjectStringified = JSON.stringify(updateObject);
+          const updateObjectStringified = JSON.stringify(updateObject);
 
-            wsServer.clients.forEach((client) => {
-              client.send(updateObjectStringified);
-            })
-            // socket.send(updateObjectStringified);
-          })
-      } else if (parsedMessage.type === "deckTitle") {
-        //running
-      } else if (parsedMessage.type === "newList") {
-        const newList = new List({
-          board_id: parsedMessage.id,
-          title: parsedMessage.value
-        });
+          wsServer.clients.forEach((client) => {
+            client.send(updateObjectStringified);
+          });
+          // socket.send(updateObjectStringified);
+        }
+      );
+    } else if (parsedMessage.type === "deckTitle") {
+      //running
+    } else if (parsedMessage.type === "newList") {
+      const newList = new List({
+        board_id: parsedMessage.id,
+        title: parsedMessage.value,
+      });
 
-        newList.save().then(data => debug(data)).catch(error => debug(error));
-      }
+      newList
+        .save()
+        .then((data) => debug(data))
+        .catch((error) => debug(error));
     }
-  );
+  });
 });
-
-
-
 
 module.exports = router;

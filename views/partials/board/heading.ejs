@@ -1,7 +1,12 @@
 <board-heading class="board__title-container">
-    <!--@TODO inject value from model both into input value and h1-->
-    <input is="board-title-input" id="board-title-input" class="board__title-input hidden" type="text" value="<%= title %>" mimicks-element="#board-title">
-    <h1 id="board-title" is="board-title" class="board__title">
-        <%= title %>
-    </h1>
+  <!--@TODO inject value from model both into input value and h1-->
+  <input
+    is="board-title-input"
+    id="board-title-input"
+    class="board__title-input hidden"
+    type="text"
+    value="<%= title %>"
+    mimicks-element="#board-title"
+  />
+  <h1 id="board-title" is="board-title" class="board__title"><%= title %></h1>
 </board-heading>

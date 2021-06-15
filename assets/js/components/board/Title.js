@@ -1,39 +1,45 @@
-import socketConnection from '../../services/websocket';
+import socketConnection from "../../services/websocket";
 
 export default class Title extends HTMLHeadingElement {
-  constructor () {
+  constructor() {
     super();
     // this.boardService = boardService;
   }
 
-  updateText (newTitle) {
+  updateText(newTitle) {
     this.innerText = newTitle;
   }
 
-  connectedCallback () {
+  connectedCallback() {
     const eventHandlers = this.eventHandlers.call(this);
 
-    this.addEventListener('click', eventHandlers.click);
-    socketConnection.addEventListener('message', eventHandlers.message.bind(this));
+    this.addEventListener("click", eventHandlers.click);
+    socketConnection.addEventListener(
+      "message",
+      eventHandlers.message.bind(this)
+    );
   }
 
-  hide () {
-    this.setAttribute('style', 'position: absolute; color: transparent; z-index: -5;');
+  hide() {
+    this.setAttribute(
+      "style",
+      "position: absolute; color: transparent; z-index: -5;"
+    );
     this.hidden = true;
 
     return this;
   }
 
-  eventHandlers () {
-    const inputForTitle = document.getElementById('board-title-input');
+  eventHandlers() {
+    const inputForTitle = document.getElementById("board-title-input");
 
     const click = () => inputForTitle.focus();
 
     const message = function (message) {
       const parsedMessage = JSON.parse(message.data);
 
-      if (parsedMessage.type === 'boardTitle') {
-        this.innerText = (parsedMessage.value);
+      if (parsedMessage.type === "boardTitle") {
+        this.innerText = parsedMessage.value;
       }
     };
 

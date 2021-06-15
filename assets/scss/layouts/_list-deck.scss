@@ -1,106 +1,105 @@
 .list-deck {
+  display: flex;
+  // overflow-x: scroll;
+  color: rgb(23, 43, 77);
+
+  & > * {
+    margin-right: 1rem;
+  }
+
+  &__list {
+    align-self: flex-start;
+    padding: 0.4rem 1rem 0.8rem;
+    border-radius: $border-radius-default;
+    background-color: var(--color-list-background);
+    width: 27.2rem;
+  }
+
+  &__list-header {
+    display: flex;
+    align-items: center;
+  }
+
+  &__list-footer {
+    display: flex;
+  }
+
+  &__title {
+    font-size: 1.8rem;
+  }
+
+  &__title-input {
+    font-family: inherit;
+    font-size: 1.4rem;
+    font-weight: 700;
+    background-color: inherit;
+    color: inherit;
+    padding: 0.4rem 0 0.4rem 0.8rem;
+    border: none;
+    margin: 0.4rem 0;
+    height: 3.3rem;
+    line-height: normal;
+    flex: 1;
+    cursor: pointer;
+    resize: none;
+    overflow: hidden;
+
+    &:focus,
+    &--add-list {
+      background-color: var(--color-deck-list-header-background--focus);
+      border: 2px solid var(--color-primary-blue);
+      border-radius: 4px;
+      outline: none;
+      padding: 0.2rem 0 0.2rem 0.6rem;
+    }
+  }
+
+  &__card-list {
+    list-style: none;
+  }
+
+  &__card {
+    background-color: var(--color-list-card-background);
+    padding: 0.6rem 0.8rem;
+    border-radius: $border-radius-default;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+    cursor: pointer;
 
     display: flex;
-    // overflow-x: scroll;
-    color: rgb(23, 43, 77);
 
-    & > * {
-        margin-right: 1rem;
+    &:hover {
+      background-color: var(--color-list-card-background--hover);
     }
 
-    &__list {
-        align-self: flex-start;
-        padding: .4rem 1rem 0.8rem;
-        border-radius: $border-radius-default;
-        background-color: var(--color-list-background);
-        width: 27.2rem;
+    &:hover .btn--edit-card {
+      opacity: 1;
     }
+  }
 
-    &__list-header {
-        display: flex;
-        align-items: center;
+  &__card-title {
+    font-size: inherit;
+    font-weight: inherit;
+    margin-right: auto;
+  }
+
+  &__add-card {
+    color: var(--color-list-card-add-card);
+    display: flex;
+    justify-content: space-between;
+
+    &:hover {
+      color: #000;
     }
+  }
 
-    &__list-footer {
-        display: flex;
+  &__icon {
+    fill: var(--color-list-card-add-card);
+    height: 1.2rem;
+    width: 1.2rem;
+
+    &:hover {
+      fill: #000;
     }
-
-    &__title {
-        font-size: 1.8rem;
-    }
-
-    &__title-input {
-        font-family: inherit;
-        font-size: 1.4rem;
-        font-weight: 700;
-        background-color: inherit;
-        color: inherit;
-        padding: .4rem 0 .4rem .8rem;
-        border: none;
-        margin: .4rem 0;
-        height: 3.3rem;
-        line-height: normal;
-        flex: 1;
-        cursor: pointer;
-        resize: none;
-        overflow: hidden;
-
-
-        &:focus, &--add-list {
-            background-color: var(--color-deck-list-header-background--focus);
-            border: 2px solid var(--color-primary-blue);
-            border-radius: 4px;
-            outline: none;
-            padding: .2rem 0 .2rem .6rem;
-        }
-    }
-
-    &__card-list {
-        list-style: none;
-    }
-
-    &__card {
-        background-color: var(--color-list-card-background);
-        padding: .6rem .8rem;
-        border-radius: $border-radius-default;
-        margin-bottom: .5rem;
-        box-shadow: 0 1px 0 rgba(9,30,66,.25);
-        cursor: pointer;
-
-        display: flex;
-
-        &:hover {
-            background-color: var(--color-list-card-background--hover);
-        }
-
-        &:hover .btn--edit-card {
-            opacity: 1;
-        }
-    }
-
-    &__card-title {
-        font-size: inherit;
-        font-weight: inherit;
-        margin-right: auto;
-    }
-
-    &__add-card {
-        color: var(--color-list-card-add-card);
-        display:flex;
-        justify-content: space-between;
-
-        &:hover {
-            color: #000;
-        }
-    }
-
-    &__icon {
-        fill: var(--color-list-card-add-card);;
-        height: 1.2rem;
-        width: 1.2rem;
-
-        &:hover {
-            fill: #000;
-        }
-    }
+  }
 }

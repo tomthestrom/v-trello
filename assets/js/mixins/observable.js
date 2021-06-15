@@ -1,17 +1,17 @@
 const observable = {
   observers: [],
 
-  subscribe (fn) {
+  subscribe(fn) {
     this.observers.push(fn);
   },
 
-  unsubscribe (fn) {
-    this.observers = this.observers.filter(observer => observer !== fn);
+  unsubscribe(fn) {
+    this.observers = this.observers.filter((observer) => observer !== fn);
   },
 
-  notify (data) {
-    this.observers.forEach(observer => observer(data));
-  }
+  notify(data) {
+    this.observers.forEach((observer) => observer(data));
+  },
 };
 
 export { observable };

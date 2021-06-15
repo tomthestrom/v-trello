@@ -54,7 +54,11 @@ class DropZoneManager {
     }
   }
 
-  getClosestElementInDirection(surroundingElements, coordinate, dirPositive = false) {
+  getClosestElementInDirection(
+    surroundingElements,
+    coordinate,
+    dirPositive = false
+  ) {
     return surroundingElements.reduce(
       (acc, element) => {
         const box = element.getBoundingClientRect();

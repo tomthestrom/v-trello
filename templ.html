@@ -1,181 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/style.css" />
     <title>V-Trello</title>
-</head>
-<body>
+  </head>
+  <body>
     <!-- HEADER START -->
     <header class="header">
-        <div class="header__group header__group--left">
-            <div class="header__atlasian">
-                <button class="btn btn--header">
-                    <svg class="header__icon">
-                        <use xlink:href="assets/icons/sprite.svg#dots-menu"></use>
-                    </svg>
-                </button>
-            </div>
-            <!--change to a-->
-            <button class="btn btn--header">
-                <svg class="header__icon">
-                    <use xlink:href="assets/icons/sprite.svg#home"></use>
-                </svg>
-            </button>
-            <div class="header__boards">
-                <button class="btn btn--header btn--boards">
-                    <svg class="header__icon header__icon--boards">
-                        <use xlink:href="assets/icons/sprite.svg#trello"></use>
-                    </svg>
-                    <span>Boards</span>
-                </button>
-            </div>
-            <form action="#" class="header__search">
-                <input type="text" class="header__input" placeholder="">
-                <button class="btn btn--search">
-                    <svg class="header__icon">
-                        <use xlink:href="assets/icons/sprite.svg#search"></use>
-                    </svg>
-                </button>
-            </form>
-            <a href="#" class="header__logo-link">
-                <img src="assets/icons/trillo-header.png" alt="Trello Logo" class="header__logo-img">
-            </a>
+      <div class="header__group header__group--left">
+        <div class="header__atlasian">
+          <button class="btn btn--header">
+            <svg class="header__icon">
+              <use xlink:href="assets/icons/sprite.svg#dots-menu"></use>
+            </svg>
+          </button>
         </div>
+        <!--change to a-->
+        <button class="btn btn--header">
+          <svg class="header__icon">
+            <use xlink:href="assets/icons/sprite.svg#home"></use>
+          </svg>
+        </button>
+        <div class="header__boards">
+          <button class="btn btn--header btn--boards">
+            <svg class="header__icon header__icon--boards">
+              <use xlink:href="assets/icons/sprite.svg#trello"></use>
+            </svg>
+            <span>Boards</span>
+          </button>
+        </div>
+        <form action="#" class="header__search">
+          <input type="text" class="header__input" placeholder="" />
+          <button class="btn btn--search">
+            <svg class="header__icon">
+              <use xlink:href="assets/icons/sprite.svg#search"></use>
+            </svg>
+          </button>
+        </form>
+        <a href="#" class="header__logo-link">
+          <img
+            src="assets/icons/trillo-header.png"
+            alt="Trello Logo"
+            class="header__logo-img"
+          />
+        </a>
+      </div>
 
-        <div class="header__group header__group--right">
-            <button class="btn btn--header">
-                <svg class="header__icon">
-                    <use xlink:href="assets/icons/sprite.svg#plus"></use>
-                </svg>
-            </button>
-            <button class="btn btn--header">
-                <svg class="header__icon">
-                    <use xlink:href="assets/icons/sprite.svg#information"></use>
-                </svg>
-            </button>
-            <button class="btn btn--header">
-                <svg class="header__icon">
-                    <use xlink:href="assets/icons/sprite.svg#notification"></use>
-                </svg>
-            </button>
-        </div>
-        <div class="user-icon">
-            <span class="user-icon__initials">TH</span>
-        </div>
-
+      <div class="header__group header__group--right">
+        <button class="btn btn--header">
+          <svg class="header__icon">
+            <use xlink:href="assets/icons/sprite.svg#plus"></use>
+          </svg>
+        </button>
+        <button class="btn btn--header">
+          <svg class="header__icon">
+            <use xlink:href="assets/icons/sprite.svg#information"></use>
+          </svg>
+        </button>
+        <button class="btn btn--header">
+          <svg class="header__icon">
+            <use xlink:href="assets/icons/sprite.svg#notification"></use>
+          </svg>
+        </button>
+      </div>
+      <div class="user-icon">
+        <span class="user-icon__initials">TH</span>
+      </div>
     </header>
     <!-- HEADER END -->
     <!-- MAIN START -->
     <main class="board">
-        <!-- BOARD MANAGAMENT START -->
-        <div class="board__management">
+      <!-- BOARD MANAGAMENT START -->
+      <div class="board__management">
+        <board-heading class="board__title-container">
+          <!-- tu si pridam nejake one na menenie -->
+          <input
+            is="board-title-input"
+            class="board__title-input hidden"
+            type="text"
+            value="Test"
+            data-bind="board__title"
+            data-grow-input
+            data-click-focus-destination="board__title-input"
+          />
+          <h1
+            is="board-title"
+            class="board__title"
+            data-bind="board__title"
+            data-click-focus-target="board__title-input"
+            data-grow-input-reference
+          >
+            test
+          </h1>
+        </board-heading>
 
-            <board-heading class="board__title-container">
-                <!-- tu si pridam nejake one na menenie -->
-                <input is="board-title-input" class="board__title-input hidden" type="text" value="Test" data-bind="board__title" data-grow-input data-click-focus-destination="board__title-input">
-                <h1 is="board-title" class="board__title" data-bind="board__title" data-click-focus-target="board__title-input" data-grow-input-reference>
-                    test
-                </h1>
-            </board-heading>
+        <button
+          class="btn btn--bman btn--favorite mg-right-20 position-relative"
+        >
+          <svg class="board__icon">
+            <use xlink:href="assets/icons/sprite.svg#star"></use>
+          </svg>
+        </button>
 
-            <button class="btn btn--bman btn--favorite mg-right-20 position-relative">
-                <svg class="board__icon">
-                    <use xlink:href="assets/icons/sprite.svg#star"></use>
-                </svg>
-            </button>
-
-            <div class="board__ownership mg-right-20 position-relative">
-                <button class="btn btn--bman">Personal</button>
-            </div>
-
-            <div class="board__visibility mg-right-20 position-relative">
-                <button class="btn btn--bman">
-                    <svg class="board__icon">
-                        <use xlink:href="assets/icons/sprite.svg#lock"></use>
-                    </svg>
-                    <span>
-                        Private
-                    </span>
-                </button>
-            </div>
-
-            <button class="btn btn--bman mg-right-auto">
-                Invite
-            </button>
-            <button class="btn btn--bman mg-right-5">
-                <svg class="board__icon">
-                    <use xlink:href="assets/icons/sprite.svg#butler"></use>
-                </svg>
-                <span>
-                    Butler
-                </span>
-            </button>
-            <div class="board__menu">
-                <button class="btn btn--bman">
-                    <svg class="board__icon">
-                        <use xlink:href="assets/icons/sprite.svg#more"></use>
-                    </svg>
-                    <span>
-                        Show Menu
-                    </span>
-                </button>
-            </div>
+        <div class="board__ownership mg-right-20 position-relative">
+          <button class="btn btn--bman">Personal</button>
         </div>
-        <!-- BOARD MANAGAMENT END -->
-        <div class="list-deck">
-            <div class="list-deck__list">
-                <div class="list-deck__list-header">
-                    <!--toto by sa mohlo spolu riesit vsetky tieto klikatelne/editovatelne policko-nadpisy, nejak to o o ecmascriptit :) -->
-                    <h2 class="list-deck__title hidden" data-bind="list-deck__title">Things to do</h2>
-                    <input class="list-deck__title-input" type="text" value="Things to do" data-bind="list-deck__title">
-                </div>
-                <ul class="list-deck__card-list">
-                    <li class="list-deck__card">
-                        <h3 class="list-deck__card-title">
-                            Say Hello World
-                        </h3>
-                       <button class="btn btn--list btn--edit-card">
-                            <svg class="list-deck__icon">
-                                <use xlink:href="assets/icons/sprite.svg#edit"></use>
-                            </svg>
-                       </button>
-                    </li>
-                    <li class="list-deck__card">
-                        <h3 class="list-deck__card-title">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum quaerat autem libero nemo, necessitatibus inventore incidunt cumque provident vero voluptatem numquam dignissimos nesciunt, ullam saepe iste. Ipsum sapiente distinctio enim.
-                        </h3>
-                       <button class="btn btn--list btn--edit-card">
-                            <svg class="list-deck__icon">
-                                <use xlink:href="assets/icons/sprite.svg#edit"></use>
-                            </svg>
-                       </button>
-                    </li>
-                </ul>
-                <div class="list-deck__list-footer">
-                    <div class="list-deck__add-card">
-                        <button class="btn btn--list btn--add-card">
-                            <svg class="list-deck__icon">
-                                <use xlink:href="assets/icons/sprite.svg#plus"></use>
-                            </svg>
-                            <span>Add another card</span>
-                        </button>
-                        <button title="Create from template..." class="btn btn--list">
-                            <svg class="list-deck__icon">
-                                <use xlink:href="assets/icons/sprite.svg#browser"></use>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
+
+        <div class="board__visibility mg-right-20 position-relative">
+          <button class="btn btn--bman">
+            <svg class="board__icon">
+              <use xlink:href="assets/icons/sprite.svg#lock"></use>
+            </svg>
+            <span> Private </span>
+          </button>
         </div>
+
+        <button class="btn btn--bman mg-right-auto">Invite</button>
+        <button class="btn btn--bman mg-right-5">
+          <svg class="board__icon">
+            <use xlink:href="assets/icons/sprite.svg#butler"></use>
+          </svg>
+          <span> Butler </span>
+        </button>
+        <div class="board__menu">
+          <button class="btn btn--bman">
+            <svg class="board__icon">
+              <use xlink:href="assets/icons/sprite.svg#more"></use>
+            </svg>
+            <span> Show Menu </span>
+          </button>
+        </div>
+      </div>
+      <!-- BOARD MANAGAMENT END -->
+      <div class="list-deck">
+        <div class="list-deck__list">
+          <div class="list-deck__list-header">
+            <!--toto by sa mohlo spolu riesit vsetky tieto klikatelne/editovatelne policko-nadpisy, nejak to o o ecmascriptit :) -->
+            <h2 class="list-deck__title hidden" data-bind="list-deck__title">
+              Things to do
+            </h2>
+            <input
+              class="list-deck__title-input"
+              type="text"
+              value="Things to do"
+              data-bind="list-deck__title"
+            />
+          </div>
+          <ul class="list-deck__card-list">
+            <li class="list-deck__card">
+              <h3 class="list-deck__card-title">Say Hello World</h3>
+              <button class="btn btn--list btn--edit-card">
+                <svg class="list-deck__icon">
+                  <use xlink:href="assets/icons/sprite.svg#edit"></use>
+                </svg>
+              </button>
+            </li>
+            <li class="list-deck__card">
+              <h3 class="list-deck__card-title">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum
+                quaerat autem libero nemo, necessitatibus inventore incidunt
+                cumque provident vero voluptatem numquam dignissimos nesciunt,
+                ullam saepe iste. Ipsum sapiente distinctio enim.
+              </h3>
+              <button class="btn btn--list btn--edit-card">
+                <svg class="list-deck__icon">
+                  <use xlink:href="assets/icons/sprite.svg#edit"></use>
+                </svg>
+              </button>
+            </li>
+          </ul>
+          <div class="list-deck__list-footer">
+            <div class="list-deck__add-card">
+              <button class="btn btn--list btn--add-card">
+                <svg class="list-deck__icon">
+                  <use xlink:href="assets/icons/sprite.svg#plus"></use>
+                </svg>
+                <span>Add another card</span>
+              </button>
+              <button title="Create from template..." class="btn btn--list">
+                <svg class="list-deck__icon">
+                  <use xlink:href="assets/icons/sprite.svg#browser"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <!-- MAIN END -->
-<script type="module" src="assets/js/components/_board-heading/Heading.js"></script>
-<script type="module" src="assets/js/components/_board-heading/HeadingClone.js"></script>
-<script type="module" src="assets/js/components/_board-heading/Input.js"></script>
-<script type="module" src="assets/js/controllers/board-management.js"></script>
-<script type="javascript" src="assets/js/index.js"></script>
-</body>
+    <script
+      type="module"
+      src="assets/js/components/_board-heading/Heading.js"
+    ></script>
+    <script
+      type="module"
+      src="assets/js/components/_board-heading/HeadingClone.js"
+    ></script>
+    <script
+      type="module"
+      src="assets/js/components/_board-heading/Input.js"
+    ></script>
+    <script
+      type="module"
+      src="assets/js/controllers/board-management.js"
+    ></script>
+    <script type="javascript" src="assets/js/index.js"></script>
+  </body>
 </html>

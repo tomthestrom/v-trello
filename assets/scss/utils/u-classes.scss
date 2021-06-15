@@ -1,26 +1,25 @@
-
 /*  
 Margins
 
 */
 .mg-right-0 {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 .mg-right-auto {
-    margin-right: auto;
+  margin-right: auto;
 }
 
 .mg-right-5 {
-    margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 
 .mg-right-8 {
-    margin-right: .8rem;
+  margin-right: 0.8rem;
 }
 
 .mg-right-20 {
-    margin-right: 2rem;
+  margin-right: 2rem;
 }
 
 /*
@@ -29,12 +28,8 @@ Position
 */
 
 .position-relative {
-    position: relative;
+  position: relative;
 }
-
-
-
-
 
 /*
 
@@ -44,12 +39,12 @@ Various
 */
 
 .hidden {
-    border: 0;
-    clip: rect(1px, 1px, 1px, 1px);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }

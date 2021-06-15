@@ -1,8 +1,7 @@
 class CardDeck extends HTMLUListElement {
-
-    constructor () {
-        super();
-    }
+  constructor() {
+    super();
+  }
 }
 
-export { CardDeck as CardDeckElement }
+export { CardDeck as CardDeckElement };

@@ -24,17 +24,21 @@ const listDrag = (function () {
   };
 
   const calculateEdge = (side = "left") => {
-    const edge = side === "left" ? startDimensions.left : startDimensions.right; 
-    const distanceTravelled = horizontalDragDir.isDirPositiveFromStart() ?  horizontalDragDir.distTravelled() : horizontalDragDir.distTravelled() * -1 ;
+    const edge = side === "left" ? startDimensions.left : startDimensions.right;
+    const distanceTravelled = horizontalDragDir.isDirPositiveFromStart()
+      ? horizontalDragDir.distTravelled()
+      : horizontalDragDir.distTravelled() * -1;
 
     return edge + distanceTravelled;
-  }
+  };
 
   const calculateTop = () => {
-      const distanceTravelled = verticalDragDir.isDirPositiveFromStart() ?  verticalDragDir.distTravelled() : verticalDragDir.distTravelled() * -1;
+    const distanceTravelled = verticalDragDir.isDirPositiveFromStart()
+      ? verticalDragDir.distTravelled()
+      : verticalDragDir.distTravelled() * -1;
 
-      return startDimensions.top + distanceTravelled;
-  } 
+    return startDimensions.top + distanceTravelled;
+  };
 
   return {
     init(
@@ -74,7 +78,7 @@ const listDrag = (function () {
       verticalDragDir.setCurDir(curYPos);
 
       const list = this.getList();
-      const leftEdge = calculateEdge(); 
+      const leftEdge = calculateEdge();
       const rightEdge = calculateEdge("right");
       const top = calculateTop();
       const scrollDeckBy = rightEdge - this.getList().width;

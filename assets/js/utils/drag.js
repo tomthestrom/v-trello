@@ -1,4 +1,5 @@
-const emptyDragImage = document.createElement('img'); 
-emptyDragImage.src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+const emptyDragImage = document.createElement("img");
+emptyDragImage.src =
+  "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
 
-export { emptyDragImage }
+export { emptyDragImage };

@@ -1,8 +1,8 @@
 const createError = require("http-errors");
 const express = require("express");
-const cors = require('cors');
-const mongoose = require('mongoose');
-require('dotenv').config();
+const cors = require("cors");
+const mongoose = require("mongoose");
+require("dotenv").config();
 
 const path = require("path");
 
@@ -14,21 +14,17 @@ app.use(cors());
 app.use(express.json());
 
 const atlasUri = process.env.ATLAS_URI;
-mongoose.connect(
-  atlasUri, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false 
-  }
-);
+mongoose.connect(atlasUri, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+});
 
 const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log('Mongo DB connection established successfully')
-})
-
-
+connection.once("open", () => {
+  console.log("Mongo DB connection established successfully");
+});
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

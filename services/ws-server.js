@@ -1,9 +1,8 @@
-const ws = require('ws');
+const ws = require("ws");
 
-const wsServer = new ws.Server({ 
-    noServer: true,
-    port: 8080
- });
-
+const wsServer = new ws.Server({
+  noServer: true,
+  port: 8080,
+});
 
 module.exports = wsServer;

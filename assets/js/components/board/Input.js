@@ -1,5 +1,5 @@
-import { replaceSpaceWithNBSP } from '../../utils/string';
-import socketConnection from '../../services/websocket';
+import { replaceSpaceWithNBSP } from "../../utils/string";
+import socketConnection from "../../services/websocket";
 
 // import boardService from '../../services/board';
 /**
@@ -7,29 +7,29 @@ import socketConnection from '../../services/websocket';
  * when focused - appears and dynamically grows mimicking the <h1> behavior
  */
 export default class TitleInput extends HTMLInputElement {
-  constructor () {
+  constructor() {
     super();
   }
 
-  connectedCallback () {
+  connectedCallback() {
     const eventHandlers = this.eventHandlers.call(this);
 
-    this.addEventListener('focus', eventHandlers.focus);
-    this.addEventListener('input', eventHandlers.input);
-    this.addEventListener('focusout', eventHandlers.focusout);
+    this.addEventListener("focus", eventHandlers.focus);
+    this.addEventListener("input", eventHandlers.input);
+    this.addEventListener("focusout", eventHandlers.focusout);
   }
 
   // @TODO: DRY stuff called in each event handler
-  eventHandlers () {
+  eventHandlers() {
     // updates once it's been inserted/removed into/from DOM
     let mimickedElementCloneInDOM;
-    const mimickedElementSelector = this.getAttribute('mimicks-element');
+    const mimickedElementSelector = this.getAttribute("mimicks-element");
 
     const focus = function () {
       const mimickedElement = document.querySelector(mimickedElementSelector);
       const mimickedElementClone = prepareMimickedElementClone(mimickedElement);
 
-      this.insertAdjacentElement('afterend', mimickedElementClone);
+      this.insertAdjacentElement("afterend", mimickedElementClone);
 
       setMimickedElementCloneInDOM();
       updateInnerTextFromMimickedElement(mimickedElement);
@@ -47,9 +47,9 @@ export default class TitleInput extends HTMLInputElement {
       mimickedElementCloneInDOM = undefined;
 
       const updateObject = {
-        id: '6022b00811c58d5b8d2c6943',
-        type: 'boardTitle',
-        value: this.value
+        id: "6022b00811c58d5b8d2c6943",
+        type: "boardTitle",
+        value: this.value,
       };
 
       socketConnection.send(JSON.stringify(updateObject));
@@ -57,22 +57,32 @@ export default class TitleInput extends HTMLInputElement {
 
     const prepareMimickedElementClone = function (mimickedElement) {
       const mimickedElementClone = mimickedElement.cloneNode(true);
-      mimickedElementClone.id += '-clone';
-      mimickedElementClone.setAttribute('style', 'position: absolute; color: transparent; z-index: -5;');
+      mimickedElementClone.id += "-clone";
+      mimickedElementClone.setAttribute(
+        "style",
+        "position: absolute; color: transparent; z-index: -5;"
+      );
 
       return mimickedElementClone;
     };
 
-    const updateWidth = () => this.style.width = mimickedElementCloneInDOM.getBoundingClientRect().width + 'px';
+    const updateWidth = () =>
+      (this.style.width =
+        mimickedElementCloneInDOM.getBoundingClientRect().width + "px");
 
-    const updateInnerTextFromMimickedElement = (mimickedElement) => this.value = mimickedElement.innerText;
+    const updateInnerTextFromMimickedElement = (mimickedElement) =>
+      (this.value = mimickedElement.innerText);
 
-    const setMimickedElementCloneInDOM = () => mimickedElementCloneInDOM = this.nextElementSibling;
+    const setMimickedElementCloneInDOM = () =>
+      (mimickedElementCloneInDOM = this.nextElementSibling);
 
-    const updateMimickedElementInnerHTMLFromThis = text => mimickedElementCloneInDOM.innerHTML = replaceSpaceWithNBSP(text);
+    const updateMimickedElementInnerHTMLFromThis = (text) =>
+      (mimickedElementCloneInDOM.innerHTML = replaceSpaceWithNBSP(text));
 
     return {
-      focus, focusout, input
+      focus,
+      focusout,
+      input,
     };
   }
 }

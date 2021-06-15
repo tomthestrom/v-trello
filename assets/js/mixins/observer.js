@@ -1,8 +1,7 @@
 const observer = {
+  update() {
+    this.observers.forEach((observer) => observer(data));
+  },
+};
 
-    update () {
-      this.observers.forEach(observer => observer(data));
-    }
-  }
-  
-  export { observable };
+export { observable };

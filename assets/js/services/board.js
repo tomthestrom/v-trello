@@ -4,17 +4,17 @@ export default function () {
     let newTitle;
 
     return {
-      getCurrentTitle () {
+      getCurrentTitle() {
         return this.currentTitle;
       },
 
-      setCurrentTitle (title) {
+      setCurrentTitle(title) {
         this.currentTitle = title;
       },
 
-      handleInputUpdates (updateValue) {
+      handleInputUpdates(updateValue) {
         console.log(updateValue);
-      }
+      },
     };
   })();
-};
+}

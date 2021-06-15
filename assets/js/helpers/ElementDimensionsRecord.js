@@ -2,7 +2,7 @@
  * Stores elements' properties at the moment of creation
  */
 class ElementDimensionsRecord {
-  constructor (element) {
+  constructor(element) {
     this.element = element;
     this.box = element.getBoundingClientRect();
   }

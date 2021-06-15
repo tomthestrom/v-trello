@@ -1,7 +1,7 @@
 /**
  * Drag direction helper
  */
- class Direction {
+class Direction {
   constructor(startCoord, direction) {
     if (!Direction.DIR_SETTINGS.hasOwnProperty(direction)) {
       throw new Error("Unknown direction provided.");

@@ -1,151 +1,149 @@
 .btn {
-    font-size: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  &--header {
     color: inherit;
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.3);
 
-    border: none;
-    outline: none;
-    cursor: pointer;
+    border-radius: $border-radius-default;
+    margin-right: $header-horizontal-gutter;
 
+    min-width: 3.2rem;
+    height: 3.2rem;
 
-    &--header {
-        color: inherit;
-        background-color: rgba(255, 255, 255, 0.3);
+    &:focus,
+    &:hover {
+      background-color: hsla(0, 0%, 100%, 0.175);
+    }
+  }
 
-        border-radius: $border-radius-default;
-        margin-right: $header-horizontal-gutter;
-        
-        min-width: 3.2rem;
-        height: 3.2rem;
-        
-        &:focus,
-        &:hover {
-            background-color: hsla(0,0%,100%,.175);
-        }
+  &--boards {
+    font-weight: 700;
+    padding: 0.6rem;
+
+    display: flex;
+    align-items: center;
+
+    width: 8.8rem;
+    span {
+      margin-left: $header-horizontal-gutter;
+    }
+  }
+
+  &--search {
+    height: 1.5rem;
+    width: 1.5rem;
+
+    transform: translateX(-2.5rem);
+
+    svg {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &--bman {
+    color: inherit;
+    background-color: var(--color-board-management-background);
+
+    padding: 0.8rem 1rem;
+    border-radius: $border-radius-default;
+
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-left: 0.8rem;
     }
 
-    &--boards {
-        font-weight: 700;
-        padding: .6rem;
-        
-        display: flex;
-        align-items: center;
-        
-        width: 8.8rem;
-        span {
-            margin-left: $header-horizontal-gutter;
-        }
+    &:focus,
+    &:hover {
+      background-color: hsla(0, 0%, 100%, 0.35);
+    }
+  }
+
+  &--favorite {
+    @extend %board__pseudo-border;
+  }
+
+  &--add-card {
+    padding: 0.6rem;
+    border-radius: $border-radius-default;
+
+    width: 22.8rem;
+    display: flex;
+    align-items: center;
+
+    span {
+      line-height: 2rem;
+      margin-left: 0.6rem;
     }
 
-    &--search {
-        height: 1.5rem;
-        width: 1.5rem;
+    &:hover {
+      background-color: var(--color-list-card-add-card--hover);
+    }
+  }
 
-        transform: translateX(-2.5rem);
+  &--edit-card {
+    opacity: 0;
 
-        svg {
-            height: 100%;
-            width: 100%;
-        }
+    padding: 1.2rem;
+
+    height: 2rem;
+    width: 2rem;
+
+    svg {
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+    }
+    &:hover {
+      background-color: var(--color-list-card-add-card--hover);
+    }
+  }
+
+  &--add-another-list {
+    color: var(--color-list-card-background);
+    padding: 2rem;
+    height: 3.2rem;
+    width: 26.4rem;
+
+    svg {
+      fill: currentColor;
+      height: 1.2rem;
+      width: 1.2rem;
+    }
+  }
+
+  &--add-list {
+    background-color: var(--color-list--add-list);
+    color: var(--color-list-card-background);
+    border-radius: $border-radius-default;
+    padding: 0.8rem 1.3rem;
+    margin-right: 1.5rem;
+
+    &:hover {
+      background-color: var(--color-list--add-list--hover);
     }
 
-    &--bman {
-        color: inherit;
-        background-color: var(--color-board-management-background);
-
-        padding: 0.8rem 1rem;
-        border-radius: $border-radius-default;
-
-        display: flex;
-        align-items: center;
-
-        span {
-            margin-left: .8rem;
-        }
-
-
-        &:focus,
-        &:hover {
-            background-color: hsla(0,0%,100%,.35);
-        }
+    &:active {
+      background-color: var(--color-list--add-list--active);
     }
+  }
 
-    &--favorite {
-        @extend %board__pseudo-border;
+  &--close-add-list {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--color-list-card-add-card);
+
+    &:hover {
+      color: #000;
     }
-
-    &--add-card {
-        padding: .6rem;
-        border-radius: $border-radius-default;
-
-        width: 22.8rem;
-        display: flex;
-        align-items: center;
-
-        span {
-            line-height: 2rem;
-            margin-left: .6rem;
-        }
-
-        &:hover {
-            background-color: var(--color-list-card-add-card--hover);
-        }
-    }
-
-    &--edit-card {
-        opacity: 0;
-        
-        padding: 1.2rem;
-            
-        height: 2rem;
-        width: 2rem;
-
-        svg {
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-        }
-        &:hover {
-            background-color: var(--color-list-card-add-card--hover);
-        }
-    }
-
-    &--add-another-list {
-        color: var(--color-list-card-background);
-        padding: 2rem;
-        height: 3.2rem;
-        width: 26.4rem;
-
-        svg {
-            fill: currentColor; 
-            height: 1.2rem;
-            width: 1.2rem;
-        }
-    }
-
-    &--add-list {
-        background-color: var(--color-list--add-list);
-        color: var(--color-list-card-background);
-        border-radius: $border-radius-default;
-        padding: .8rem 1.3rem;
-        margin-right: 1.5rem;
-
-        &:hover {
-            background-color: var(--color-list--add-list--hover);
-        }
-
-        &:active {
-            background-color: var(--color-list--add-list--active);
-        }
-    }
-
-    &--close-add-list {
-        font-size: 2.2rem;
-        font-weight: 700;
-        color: var(--color-list-card-add-card); 
-
-        &:hover {
-            color: #000; 
-        }
-    }
+  }
 }
