@@ -94,10 +94,8 @@ class CardList extends HTMLElement {
       this.insertDropZoneBeforeThis();
       listDrag.init(this, e.pageX, e.pageY, this.dropZone);
       e.dataTransfer.setDragImage(emptyDragImage, 0, 0);
-    } else {
-      e.preventDefault();
-    }
-  }
+    }  
+   }
 
   dragEnd() {
     listDrag.resetState();

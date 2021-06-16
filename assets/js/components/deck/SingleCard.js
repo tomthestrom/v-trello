@@ -78,13 +78,13 @@ class SingleCard extends HTMLLIElement {
   }
 
   dragStart(e) {
+    e.dataTransfer.setData('text/plain', this);
+    e.dataTransfer.setDragImage(emptyDragImage, 0, 0);
     this.dragActive = true;
     this.dropZone = this.createDropZone();
     this.applyDragStyling();
     this.insertDropZoneBeforeThis();
     cardDrag.init(this, e.pageX, e.pageY, this.dropZone);
-    e.dataTransfer.setData('Text', this);
-    e.dataTransfer.setDragImage(emptyDragImage, 0, 0);
   }
 
   dragEnd() {
