@@ -77,6 +77,7 @@ const cardDrag = (function () {
       horizontalDragDir.setCurDir(curXPos);
       verticalDragDir.setCurDir(curYPos);
 
+      console.log(horizontalDragDir)
       const card = this.getCard();
       const leftEdge = calculateEdge();
       const rightEdge = calculateEdge("right");

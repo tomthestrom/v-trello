@@ -21,6 +21,11 @@ class SingleCard extends HTMLLIElement {
     return "[data-draggable-card][data-drag-active=false]";
   }
 
+
+  get dropZone() {
+    return this._dropZone;
+  }
+
   get dropZoneBgColor() {
     return getComputedStyle(document.documentElement).getPropertyValue(
       "--color-card-dropzone"
@@ -73,17 +78,17 @@ class SingleCard extends HTMLLIElement {
   }
 
   dragStart(e) {
-    e.preventDefault();
-    e.stopPropagation();
     this.dragActive = true;
     this.dropZone = this.createDropZone();
     this.applyDragStyling();
     this.insertDropZoneBeforeThis();
     cardDrag.init(this, e.pageX, e.pageY, this.dropZone);
+    e.dataTransfer.setData('Text', this);
     e.dataTransfer.setDragImage(emptyDragImage, 0, 0);
   }
 
   dragEnd() {
+    console.log('dragend')
     cardDrag.resetState();
     this.dragActive = false;
     this.removeDragStyling();
